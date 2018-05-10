@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SQL for Python Programmers</title>
+
+  <link rel="stylesheet" href="/{{root}}/assets/css/main.css">
+  <link rel="shortcut icon" type="image/png" href="/{{root}}/assets/favicon.ico"/>
+   {% block head %}
+   {% endblock %}
+</head>
+<body>
+
+    {% include "header.html" %}
+
+ <div class="page-content">
+    <div class="wrap">
+      <div class="home">
+        {% block body %}
+        {% endblock %}
+      </div>
+  </div>
+</div>
+
+
+</body>
+</html>
