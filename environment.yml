@@ -1,0 +1,7 @@
+name: sql_python_tutorial
+channels:
+- conda-forge
+- defaults
+dependencies:
+  - sqlalchemy=1.2
+  - pandas=0.22
