@@ -92,7 +92,7 @@ Chapter = collections.namedtuple("chapter", ["dir", "title", "nb"])
 
 if __name__ == "__main__":
 
-    nb_dir = pathlib.Path('nbs')
+    nb_dir = pathlib.Path('notebooks')
     chapter_paths = sorted(nb_dir.glob('./chapters/*ipynb'))
     other_paths = list(nb_dir.glob('./other/*ipynb'))
 
