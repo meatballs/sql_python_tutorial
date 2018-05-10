@@ -465,12 +465,14 @@ img { border: 0;
 }
 
 .previous {
+  margin: 0 auto;
   float: left;
   margin-top: 5px;
   margin-left: 7px;
 }
 
 .next {
+  margin: 0 auto;
   float: right;
   margin-top: 5px;
   margin-left: 7px;
