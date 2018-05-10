@@ -11863,6 +11863,179 @@ div#notebook {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">sa</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///flight.db&#39;</span><span class="p">)</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">flight_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;flight-data.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        INSERT INTO readings</span>
+<span class="s2">            (flight, ts, temp, pressure, humidity,</span>
+<span class="s2">            accel_x, accel_y, accel_z)</span>
+<span class="s2">        VALUES</span>
+<span class="s2">            (&#39;hab1&#39;, ?, ?, ?, ?, ?, ?, ?)</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="p">(</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">temp_h</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">pressure</span><span class="p">,</span>
+            <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">humidity</span><span class="p">)),</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">accel_x</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">accel_y</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">accel_z</span>
+        <span class="p">))</span>
+
+<span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM readings&quot;</span><span class="p">)</span>     
+<span class="o">%</span><span class="k">timeit</span> -n1 -r1 load_data(connection, flight_data)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>5min 26s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">insert</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        INSERT INTO readings</span>
+<span class="s2">            (flight, ts, temp, pressure, humidity,</span>
+<span class="s2">            accel_x, accel_y, accel_z)</span>
+<span class="s2">        VALUES</span>
+<span class="s2">            (&#39;hab1&#39;, ?, ?, ?, ?, ?, ?, ?)</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">insert</span><span class="p">,</span> <span class="p">(</span>
+                <span class="n">row</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">temp_h</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">pressure</span><span class="p">,</span>
+                <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">humidity</span><span class="p">)),</span>
+                <span class="n">row</span><span class="o">.</span><span class="n">accel_x</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">accel_y</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">accel_z</span>
+            <span class="p">))</span>
+            
+<span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM readings&quot;</span><span class="p">)</span>     
+<span class="o">%</span><span class="k">timeit</span> -n1 -r1 load_data(connection, flight_data)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>12 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">insert</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        INSERT INTO readings</span>
+<span class="s2">            (flight, ts, temp, pressure, humidity,</span>
+<span class="s2">            accel_x, accel_y, accel_z)</span>
+<span class="s2">        VALUES</span>
+<span class="s2">            (&#39;hab1&#39;, ?, ?, ?, ?, ?, ?, ?)</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="n">_data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">temp_h</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">pressure</span><span class="p">,</span>
+         <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">humidity</span><span class="p">)),</span>
+         <span class="n">row</span><span class="o">.</span><span class="n">accel_x</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">accel_y</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">accel_z</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">itertuples</span><span class="p">()</span>
+    <span class="p">]</span>
+    <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">insert</span><span class="p">,</span> <span class="n">_data</span><span class="p">)</span>
+        
+<span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM readings&quot;</span><span class="p">)</span>     
+<span class="o">%</span><span class="k">timeit</span> -n1 -r1 load_data(connection, flight_data)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3.23 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
     </div>
   </div>
 </body>
