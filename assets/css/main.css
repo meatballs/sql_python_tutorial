@@ -40,7 +40,6 @@ hr { margin: 10px 0 10px 0; }
 .wrap {
   max-width: 800px;
   padding: 0 30px;
-  margin: 0 auto;
   zoom: 1;
 }
 
@@ -71,7 +70,7 @@ hr { margin: 10px 0 10px 0; }
 }
 
 .site-nav {
-  float: right;
+  float: left;
   line-height: 56px;
 }
 
