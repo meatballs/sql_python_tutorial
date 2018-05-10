@@ -462,18 +462,35 @@ img { border: 0;
 .wrapper {
   margin-top: 20px;
   margin-bottom: 20px;
+  width: 100%;
+
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
 }
 
 .previous {
-  margin: 0 auto;
   float: left;
   margin-top: 5px;
   margin-left: 7px;
+  width: 50%;
 }
 
 .next {
-  margin: 0 auto;
   float: right;
   margin-top: 5px;
   margin-left: 7px;
+  width: 50%;
 }
+
