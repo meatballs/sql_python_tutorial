@@ -457,3 +457,20 @@ img { border: 0;
 }
 
 
+/* Nav Links */
+
+.wrapper {
+  margin: 0 auto;
+}
+
+.previous {
+  float: left;
+  margin-top: 5px;
+  margin-left: 7px;
+}
+
+.next {
+  float: right;
+  margin-top: 5px;
+  margin-left: 7px;
+}
