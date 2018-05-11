@@ -15,3 +15,11 @@ body {
   height: auto;
   background-color: #f5f5f5;
 }
+
+.list-group {
+  list-style: decimal inside;
+}
+
+.list-group-item {
+  display: list-item;
+}
