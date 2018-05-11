@@ -1,8 +1,19 @@
-<ol start=0>
-    {% for chapter in chapters %}
-        <li><a href=/{{root}}/chapters/{{ chapter.dir }}/>{{ chapter.title }}</a>
-            (<a href={{ chapter.nb }}>Download Notebook</a>)</li>
-    {% endfor %}
-</ol>
-<br>
-<a href="https://mybinder.org/v2/gh/meatballs/sql_python_notebooks/master">Launch Notebook Server</a>
+<div class="row">
+  <div class="col-md-6 col-md-offset-1">
+    <ol class="list-group">
+        {% for chapter in chapters %}
+            <li class="list-group-item borderless clearfix">
+              <div class="row">
+                <div class="col-sm-10">
+                  <a href=/{{root}}/chapters/{{ chapter.dir }} class="btn btn-link" role="button"/>{{ chapter.title }}</a>
+                </div>
+                <div class="col-sm-1">
+                  <a href={{ chapter.nb }} class="btn btn-outline-light text-dark" role="button">Download</a>
+                </div>
+              </div>
+              </li>
+        {% endfor %}
+    </ol>
+  </div>
+</div>
+<!-- <a href="https://mybinder.org/v2/gh/meatballs/sql_python_notebooks/master">Launch Notebook Server</a> -->
