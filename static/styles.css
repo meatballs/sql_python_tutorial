@@ -10,7 +10,8 @@ body {
 }
 
 .footer {
-  padding-top: 25px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   position: absolute;
   bottom: 0;
   width: 100%;
