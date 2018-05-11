@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
-<html lang="en">
+  {% block head %}
+    <link rel="stylesheet" href="http://owencampbell.me.uk/sql_python_tutorial/static/notebook.css">
+  {% endblock %}
 
   {% block body %}
     <div class="container">
@@ -14,5 +16,3 @@
       {% include 'partials/nav_links.html' %}
   </div>
   {% endblock %}
-
-</html>
