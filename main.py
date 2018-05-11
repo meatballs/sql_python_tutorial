@@ -102,10 +102,15 @@ if __name__ == "__main__":
         chapters.append(Chapter(f"{get_id(path)}",
                                 get_name(path), str(path)))
 
-    html = render_template("home.html", {"chapters": chapters,
-                                         "root": ROOT})
-    with open('index.html', 'w') as f:
-        f.write(html)
+    pages = [
+      {'template': 'home.html', 'output': 'index.html'},
+      {'template': 'intro.html', 'output': 'pages/intro.html'},
+      {'template': 'running.html', 'output': 'pages/running.html'},
+      {'template': 'primer.html', 'output': 'pages/primer.html'}]
+    for page in pages:
+      html = render_template(f'pages/{page["template"]}', {'root': ROOT})
+      with open(page['output'], 'w') as f:
+          f.write(html)
 
     html = render_template(
       "chapters.html", {"chapters": chapters, "root": ROOT})
