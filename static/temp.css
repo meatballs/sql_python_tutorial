@@ -1,3 +1,9 @@
+/*This is the inline css that's produced by the nbconver full template
+The relevant content has been stripped from here and is in notebook.css
+
+This is only kept in case anything else from here turns out to be necessary
+*/
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
