@@ -60,7 +60,6 @@ def make_dir(path, directory, previous_url=None, next_url=None):
     p = pathlib.Path(f"./{directory}/{path_id}")
     p.mkdir(exist_ok=True)
     nb, _ = convert_html(path)
-    check = False
     nb = nb.replace("{{root}}", ROOT)
     html = render_template("content.html", {"nb": nb,
         "root": ROOT,
@@ -94,10 +93,8 @@ if __name__ == "__main__":
 
     nb_dir = pathlib.Path('notebooks')
     chapter_paths = sorted(nb_dir.glob('./*ipynb'))
-    other_paths = list(nb_dir.glob('./other/*ipynb'))
 
-    for paths, directory in [(chapter_paths, "chapters"),
-                             (other_paths, "other")]:
+    for paths, directory in [(chapter_paths, "chapters")]:
         make_collection(paths=paths, directory=directory)
 
     chapters = []
@@ -110,6 +107,7 @@ if __name__ == "__main__":
     with open('index.html', 'w') as f:
         f.write(html)
 
-    html = render_template("chapters.html", {"chapters": chapters, "root": ROOT})
+    html = render_template(
+      "chapters.html", {"chapters": chapters, "root": ROOT})
     with open('./chapters/index.html', 'w') as f:
         f.write(html)
