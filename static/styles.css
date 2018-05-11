@@ -31,3 +31,19 @@ body {
 .borderless {
   border-style: none;
 }
+
+.panel {
+  padding: 1rem;
+  margin: 1rem;
+  position: relative;
+  min-height: 25rem;
+  background-color: #eceeef;
+  border-radius: 1rem;
+}
+
+.panel-button {
+  margin: 1rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
