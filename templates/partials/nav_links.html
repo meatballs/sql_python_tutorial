@@ -1,8 +1,8 @@
-<div class="wrapper">
+<div class="row">
 {% if previous_url %}
-    <div class="previous"><a href="../{{previous_url}}/"><i class="fa fa-backward fa-fw" aria-hidden="true"></i>&nbsp;Previous</a></div>
+    <div class="col-sm-6"><a href="../{{previous_url}}/"><i class="fa fa-backward fa-fw" aria-hidden="true"></i>&nbsp;Previous</a></div>
 {% endif %}
 {% if next_url %}
-    <div class="next"><a href="../{{next_url}}/"><i class="fa fa-forward fa-fw" aria-hidden="true"></i>&nbsp;Next</a></div>
+    <div class="col-sm-6 pull-right"><a href="../{{next_url}}/"><i class="fa fa-forward fa-fw" aria-hidden="true"></i>&nbsp;Next</a></div>
 {% endif %}
 </div>
