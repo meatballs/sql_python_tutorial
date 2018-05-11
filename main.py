@@ -38,7 +38,7 @@ def convert_html(nb_path):
     Convert a notebook to html
     """
     html_exporter = HTMLExporter()
-    html_exporter.template_file = "full"
+    html_exporter.template_file = "basic"
     return html_exporter.from_file(str(nb_path))
 
 
