@@ -18,10 +18,14 @@ body {
 
 .list-group {
   list-style: decimal inside;
+  white-space: nowrap;
+  padding: 0 40px;
 }
 
 .list-group-item {
   display: list-item;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 .borderless {
