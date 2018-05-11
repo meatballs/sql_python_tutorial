@@ -24,6 +24,6 @@ body {
   display: list-item;
 }
 
-li.borderless {
+.borderless {
   border-top: 0 none;
 }
