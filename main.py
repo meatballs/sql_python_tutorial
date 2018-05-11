@@ -61,7 +61,7 @@ def make_dir(path, directory, previous_url=None, next_url=None):
     p.mkdir(exist_ok=True)
     nb, _ = convert_html(path)
     nb = nb.replace("{{root}}", ROOT)
-    html = render_template("content.html", {"nb": nb,
+    html = render_template("notebook.html", {"nb": nb,
         "root": ROOT,
         "id": path_id,
         "previous_url": previous_url,
