@@ -2297,10 +2297,6 @@ ul.typeahead-list > li > a {
 
 
 /* Overrides of notebook CSS for static HTML export */
-body {
-  overflow: visible;
-  padding: 8px;
-}
 
 div#notebook {
   overflow: visible;
