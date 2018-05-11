@@ -23,3 +23,7 @@ body {
 .list-group-item {
   display: list-item;
 }
+
+li.borderless {
+  border-top: 0 none;
+}
