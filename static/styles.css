@@ -25,5 +25,5 @@ body {
 }
 
 .borderless {
-  border-top: 0 none;
+  border-style: 0 none;
 }
