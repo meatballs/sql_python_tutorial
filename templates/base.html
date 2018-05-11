@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="http://www.owencampbell.me.uk/images/favicon/favicon.ico" rel="icon">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="http://www.owencampbell.me.uk/images/favicon/favicon.ico" rel="icon">
 
-  <title>SQL for Python Programmers</title>
+    <title>SQL for Python Programmers</title>
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://owencampbell.me.uk/sql_python_tutorial/static/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://owencampbell.me.uk/sql_python_tutorial/static/styles.css">
 
-   {% block head %}
-   {% endblock %}
-</head>
-<body>
+     {% block head %}
+     {% endblock %}
+  </head>
 
+  <body>
     {% include "header.html" %}
 
-   <div class="page-content">
-      <div class="wrap">
-        <div class="home">
-          {% block body %}
-          {% endblock %}
-        </div>
-    </div>
-  </div>
-
-  {% block footer %}
-  {% endblock %}
+    <main role="main" class="container">
+      {% block body %}
+      {% endblock %}
+    </main>
 
 
-</body>
+    {% block footer %}
+       {% include "footer.html" %}
+    {% endblock %}
+
+
+  </body>
 </html>
