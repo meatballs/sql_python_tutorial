@@ -105,7 +105,7 @@ if __name__ == "__main__":
     pages = [
       {'template': 'home.html', 'output': 'index.html'},
       {'template': 'intro.html', 'output': 'pages/intro.html'},
-      {'template': 'running.html', 'output': 'pages/running.html'},
+      {'template': 'howto.html', 'output': 'pages/howto.html'},
       {'template': 'primer.html', 'output': 'pages/primer.html'}]
     for page in pages:
       html = render_template(f'pages/{page["template"]}', {'root': ROOT})
