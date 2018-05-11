@@ -20,7 +20,7 @@ body {
 .list-group {
   list-style: decimal inside;
   white-space: nowrap;
-  padding: 0 40px;
+  padding: 0 10px;
 }
 
 .list-group-item {
