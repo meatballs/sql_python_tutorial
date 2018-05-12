@@ -29,6 +29,7 @@ body {
   display: list-item;
   vertical-align: middle;
   display: inline-block;
+  padding: 5px;
 }
 
 .borderless {
