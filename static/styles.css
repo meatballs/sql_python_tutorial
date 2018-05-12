@@ -53,9 +53,7 @@ body {
 }
 
 .code-block {
-  padding: 1rem;
-  margin: 1rem;
   position: relative;
   background-color: #eceeef;
-  border-radius: 1rem;
+  border-radius: 10px;
 }
