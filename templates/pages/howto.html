@@ -1,9 +1,43 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h2><i class="fa fa-cogs" aria-hidden="true"></i> How To Use This Tutorial</h2>
-    <h4>Use an Online Service</h4>
-      <a href="https://mybinder.org/v2/gh/meatballs/sql_python_notebooks/master">Launch Notebook Server</a>
-    <h4>Install Anaconda</h4>
-    <h4>Custom Installation</h4>
+    <h1><i class="fa fa-cogs" aria-hidden="true"></i> How To Use This Tutorial</h1>
+    <p>The content of this tutorial is written using <a href="https://jupyter.org/">Jupyter Notebooks</a>. If you wish to run any of the code, you have several options:</p>
+
+    <h2>1. Use an Online Service</h2>
+    <p>This is the simplest option. There is nothing to install on your computer and everything is done within your web browser.</p>
+    <p>If you choose this option, be aware that:</p>
+    <ul>
+      <li>The server will take a few moments to start, especially at times when the service is busy.</li>
+      <li>Nothing is saved between sessions. If you close your web browser, any changes you have made to the code or the sample database will be lost.</li>
+      <li>The code typically takes longer to execute than it would on a local computer. In particular, it is best not to run the first example in <a href="/{{root}}/chapters/08/">Chapter 08 - Bulk Loading</a>.
+    </ul>
+    <p><a class="btn btn-primary btn-lg" href="https://mybinder.org/v2/gh/meatballs/sql_python_notebooks/master" role="button">Launch Notebook Server&nbsp;<i class="fa fa-play fa-fw" aria-hidden="true"></i></a></p>
+
+    <h2>2. Use Your Own Computer</h2>
+    <p>Using your own computer allows you to work offline and to keep any changes you make to the code or the sample database. It does, however, require you to install some software before you can start:</p>
+
+    <h3>2.1. Recommended Method - Anaconda</h3>
+    <p>The <a href="https://www.anaconda.com/download/">Anaconda</a> distribution of Python includes most of the necessary tools for this tutorial and so is the simplest option for running the code on your own computer.</p>
+    <p>Create a virtual environment:</p>
+    <div class="code-block">
+      <pre><code>
+        conda create -n sql-python -python=3.6
+      </code></pre>
+    </div>
+    <p>Install sqlalchemy:</p>
+    <div class="code-block">
+      <pre><code>
+        conda install -c anaconda sqlalchemy
+      </code></pre>
+    </div>
+
+    <h3>2.2 Other Python Distributions</h3>
+    <p>For other Python distributions you can install the necessary libraries using pip. It is strongly recommended that you create a virtual environment before doing so.</p>
+    <div class="code-block">
+      <pre><code>
+        pip install jupyter pandas sqlalchemy
+      </code></pre>
+    </div>
+
 {% endblock %}
