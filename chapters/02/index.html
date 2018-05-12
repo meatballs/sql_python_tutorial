@@ -99,23 +99,27 @@
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>CREATE TABLE readings (
-    flight    VARCHAR(10),
-    ts        TIMESTAMP,
-    temp      NUMERIC(3,1),
-    pressure  NUMERIC(4,0),
-    humidity  NUMERIC(3,0),
-    accel_x   REAL,
-    accel_y   REAL,
-    accel_z   REAL,
-)</p>
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
+    <span class="n">flight</span>    <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">ts</span>        <span class="n">TIMESTAMP</span><span class="p">,</span>
+    <span class="n">temp</span>      <span class="n">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">pressure</span>  <span class="n">NUMERIC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">humidity</span>  <span class="n">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">accel_x</span>   <span class="n">REAL</span><span class="p">,</span>
+    <span class="n">accel_y</span>   <span class="n">REAL</span><span class="p">,</span>
+    <span class="n">accel_z</span>   <span class="n">REAL</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -125,16 +129,29 @@
 
 </div>
 </div>
-</div>CREATE TABLE readings (
-    flight    VARCHAR(10) NOT NULL,
-    ts        TIMESTAMP NOT NULL,
-    temp      NUMERIC(3,1) NOT NULL,
-    pressure  NUMERIC(4,0) NOT NULL,
-    humidity  NUMERIC(3,0) NOT NULL,
-    accel_x   REAL DEFAULT 0 NOT NULL,
-    accel_y   REAL DEFAULT 0 NOT NULL,
-    accel_z   REAL DEFAULT 0 NOT NULL,
-)
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
+    <span class="n">flight</span>    <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">ts</span>        <span class="n">TIMESTAMP</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">temp</span>      <span class="n">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">pressure</span>  <span class="n">NUMERIC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">humidity</span>  <span class="n">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">accel_x</span>   <span class="n">REAL</span> <span class="n">DEFAULT</span> <span class="mi">0</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">accel_y</span>   <span class="n">REAL</span> <span class="n">DEFAULT</span> <span class="mi">0</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">accel_z</span>   <span class="n">REAL</span> <span class="n">DEFAULT</span> <span class="mi">0</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -144,28 +161,31 @@
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>CREATE TABLE readings (
-    flight    VARCHAR(10) NOT NULL,
-    ts        TIMESTAMP NOT NULL,
-    temp      NUMERIC(3,1) NOT NULL,
-    pressure  NUMERIC(4,0) NOT NULL,
-    humidity  NUMERIC(3,0) NOT NULL,
-    accel_x   REAL DEFAULT 0 NOT NULL,
-    accel_y   REAL DEFAULT 0 NOT NULL,
-    accel_z   REAL DEFAULT 0 NOT NULL,</p>
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
+    <span class="n">flight</span>    <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">ts</span>        <span class="n">TIMESTAMP</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">temp</span>      <span class="n">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">pressure</span>  <span class="n">NUMERIC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">humidity</span>  <span class="n">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">accel_x</span>   <span class="n">REAL</span> <span class="n">DEFAULT</span> <span class="mi">0</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">accel_y</span>   <span class="n">REAL</span> <span class="n">DEFAULT</span> <span class="mi">0</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">accel_z</span>   <span class="n">REAL</span> <span class="n">DEFAULT</span> <span class="mi">0</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
 
-<pre><code>CONSTRAINT temp_ck CHECK (temp BETWEEN -70 AND 70),
-CONSTRAINT pres_ck CHECK (pressure BETWEEN 0 AND 2000),
-CONSTRAINT hum_ck CHECK (humidity BETWEEN 0 AND 100)
-</code></pre>
-<p>)</p>
+    <span class="n">CONSTRAINT</span> <span class="n">temp_ck</span> <span class="n">CHECK</span> <span class="p">(</span><span class="n">temp</span> <span class="n">BETWEEN</span> <span class="o">-</span><span class="mi">70</span> <span class="n">AND</span> <span class="mi">70</span><span class="p">),</span>
+    <span class="n">CONSTRAINT</span> <span class="n">pres_ck</span> <span class="n">CHECK</span> <span class="p">(</span><span class="n">pressure</span> <span class="n">BETWEEN</span> <span class="mi">0</span> <span class="n">AND</span> <span class="mi">2000</span><span class="p">),</span>
+    <span class="n">CONSTRAINT</span> <span class="n">hum_ck</span> <span class="n">CHECK</span> <span class="p">(</span><span class="n">humidity</span> <span class="n">BETWEEN</span> <span class="mi">0</span> <span class="n">AND</span> <span class="mi">100</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -177,29 +197,32 @@ CONSTRAINT hum_ck CHECK (humidity BETWEEN 0 AND 100)
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>CREATE TABLE readings (
-    flight    VARCHAR(10) NOT NULL,
-    ts        TIMESTAMP NOT NULL,
-    temp      NUMERIC(3,1) NOT NULL,
-    pressure  NUMERIC(4,0) NOT NULL,
-    humidity  NUMERIC(3,0) NOT NULL,
-    accel_x   REAL DEFAULT 0 NOT NULL,
-    accel_y   REAL DEFAULT 0 NOT NULL,
-    accel_z   REAL DEFAULT 0 NOT NULL,</p>
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
+    <span class="n">flight</span>    <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">ts</span>        <span class="n">TIMESTAMP</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">temp</span>      <span class="n">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">pressure</span>  <span class="n">NUMERIC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">humidity</span>  <span class="n">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">accel_x</span>   <span class="n">REAL</span> <span class="n">DEFAULT</span> <span class="mi">0</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">accel_y</span>   <span class="n">REAL</span> <span class="n">DEFAULT</span> <span class="mi">0</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">accel_z</span>   <span class="n">REAL</span> <span class="n">DEFAULT</span> <span class="mi">0</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
 
-<pre><code>CONSTRAINT readings_pk PRIMARY KEY (flight, ts),
-CONSTRAINT temp_ck CHECK (temp BETWEEN -70 AND 70),
-CONSTRAINT pres_ck CHECK (pressure BETWEEN 0 AND 2000),
-CONSTRAINT hum_ck CHECK (humidity BETWEEN 0 AND 100)
-</code></pre>
-<p>)</p>
+    <span class="n">CONSTRAINT</span> <span class="n">readings_pk</span> <span class="n">PRIMARY</span> <span class="n">KEY</span> <span class="p">(</span><span class="n">flight</span><span class="p">,</span> <span class="n">ts</span><span class="p">),</span>
+    <span class="n">CONSTRAINT</span> <span class="n">temp_ck</span> <span class="n">CHECK</span> <span class="p">(</span><span class="n">temp</span> <span class="n">BETWEEN</span> <span class="o">-</span><span class="mi">70</span> <span class="n">AND</span> <span class="mi">70</span><span class="p">),</span>
+    <span class="n">CONSTRAINT</span> <span class="n">pres_ck</span> <span class="n">CHECK</span> <span class="p">(</span><span class="n">pressure</span> <span class="n">BETWEEN</span> <span class="mi">0</span> <span class="n">AND</span> <span class="mi">2000</span><span class="p">),</span>
+    <span class="n">CONSTRAINT</span> <span class="n">hum_ck</span> <span class="n">CHECK</span> <span class="p">(</span><span class="n">humidity</span> <span class="n">BETWEEN</span> <span class="mi">0</span> <span class="n">AND</span> <span class="mi">100</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
