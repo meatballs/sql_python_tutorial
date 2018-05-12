@@ -66,7 +66,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For this tutorial, we'll be using the <a href="https://sqlite.org/index.html">sqlite</a> Database Management System (DBMS). Sqlite support is built into the Python standard library and, because there is no server to install and configure, it's eminently suitable for the example code we'll be running.</p>
+<p>For this tutorial, we'll be using the <a href="https://sqlite.org/index.html">SQLite</a> Database Management System (DBMS). SQLite support is built into the Python standard library and, because there is no server to install and configure, it's eminently suitable for the example code we'll be running.</p>
 <p>To communicate with our database, we'll be using the <a href="http://www.sqlalchemy.org/">sqlalchemy</a> Python library. Sqlalchemy is a comprehensive toolkit for working with databases within Python. It has two main components: its Core and its Object Relational Mapper (ORM). If you've ever written a Flask application, you will be familiar with the ORM but, for this tutorial, we'll be using the Core component to issue SQL commands directly to our sqlite database.</p>
 <p>First, let's import the sqlalchemy libary:</p>
 
@@ -75,7 +75,7 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">sa</span>
@@ -91,14 +91,14 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Sqlalchemy uses an 'engine' object to interact with the database which you can create using a 'database url' string. The <a href="http://docs.sqlalchemy.org/en/latest/core/engines.html#database-urls">sqlalchemy documentation</a> has details on the different types of url you need to use for various DBMSs.</p>
-<p>Sqlite uses a single file for each database and the url is essentially a path to that file. Let's create an engine for our example database which will contain data about High Altitude Balloon flights. We'll call the database file 'flights.db:'</p>
+<p>SQLite uses a single file for each database and the url is essentially a path to that file. Let's create an engine for our example database which will contain data about High Altitude Balloon flights. We'll call the database file 'flights.db:'</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///flight.db&#39;</span><span class="p">)</span>
@@ -120,7 +120,7 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
