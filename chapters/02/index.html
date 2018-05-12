@@ -98,7 +98,12 @@
 
 </div>
 </div>
-</div>CREATE TABLE readings (
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>CREATE TABLE readings (
     flight    VARCHAR(10),
     ts        TIMESTAMP,
     temp      NUMERIC(3,1),
@@ -107,7 +112,11 @@
     accel_x   REAL,
     accel_y   REAL,
     accel_z   REAL,
-)
+)</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -134,7 +143,12 @@
 
 </div>
 </div>
-</div>CREATE TABLE readings (
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>CREATE TABLE readings (
     flight    VARCHAR(10) NOT NULL,
     ts        TIMESTAMP NOT NULL,
     temp      NUMERIC(3,1) NOT NULL,
@@ -142,12 +156,17 @@
     humidity  NUMERIC(3,0) NOT NULL,
     accel_x   REAL DEFAULT 0 NOT NULL,
     accel_y   REAL DEFAULT 0 NOT NULL,
-    accel_z   REAL DEFAULT 0 NOT NULL,
+    accel_z   REAL DEFAULT 0 NOT NULL,</p>
 
-    CONSTRAINT temp_ck CHECK (temp BETWEEN -70 AND 70),
-    CONSTRAINT pres_ck CHECK (pressure BETWEEN 0 AND 2000),
-    CONSTRAINT hum_ck CHECK (humidity BETWEEN 0 AND 100)
-)
+<pre><code>CONSTRAINT temp_ck CHECK (temp BETWEEN -70 AND 70),
+CONSTRAINT pres_ck CHECK (pressure BETWEEN 0 AND 2000),
+CONSTRAINT hum_ck CHECK (humidity BETWEEN 0 AND 100)
+</code></pre>
+<p>)</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -157,7 +176,12 @@
 
 </div>
 </div>
-</div>CREATE TABLE readings (
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>CREATE TABLE readings (
     flight    VARCHAR(10) NOT NULL,
     ts        TIMESTAMP NOT NULL,
     temp      NUMERIC(3,1) NOT NULL,
@@ -165,13 +189,18 @@
     humidity  NUMERIC(3,0) NOT NULL,
     accel_x   REAL DEFAULT 0 NOT NULL,
     accel_y   REAL DEFAULT 0 NOT NULL,
-    accel_z   REAL DEFAULT 0 NOT NULL,
+    accel_z   REAL DEFAULT 0 NOT NULL,</p>
 
-    CONSTRAINT readings_pk PRIMARY KEY (flight, ts),
-    CONSTRAINT temp_ck CHECK (temp BETWEEN -70 AND 70),
-    CONSTRAINT pres_ck CHECK (pressure BETWEEN 0 AND 2000),
-    CONSTRAINT hum_ck CHECK (humidity BETWEEN 0 AND 100)
-)
+<pre><code>CONSTRAINT readings_pk PRIMARY KEY (flight, ts),
+CONSTRAINT temp_ck CHECK (temp BETWEEN -70 AND 70),
+CONSTRAINT pres_ck CHECK (pressure BETWEEN 0 AND 2000),
+CONSTRAINT hum_ck CHECK (humidity BETWEEN 0 AND 100)
+</code></pre>
+<p>)</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
