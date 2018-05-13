@@ -134,7 +134,7 @@
     <span class="k">CONSTRAINT</span> <span class="n">hum_ck</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">humidity</span> <span class="k">BETWEEN</span> <span class="mi">0</span> <span class="k">AND</span> <span class="mi">100</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
-<p>And we can also define something known as a 'primary key' constraint for the table. This is a similar concept to a pandas index and defines a field, or combination of fields, which must be unique for each record and which can then be used to perform efficient indexed searches of the table contents.</p>
+<p>We can (and should) define a 'primary key' constraint for the table. This is a similar concept to a pandas index and defines a field, or combination of fields, which must be unique for each record and which can then be used to perform efficient indexed searches of the table contents.</p>
 <p>Again, the constraint has a name and this is commonly the name of the table followed by _pk:</p>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
     <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
@@ -153,7 +153,7 @@
 <span class="p">)</span>
 </pre></div>
 <p>In order to execute an SQL statement, we can use the 'execute' method of our connection object which takes a string as its argument. Let's hold our table creation SQL in a triple quoted string variable and pass it to the connection method.</p>
-<p>(This technique is why the capitalisation convention is useful for us since most editors cannot easily syntax highlighting to SQL within string variables):</p>
+<p>(This technique is why the capitalisation convention is useful for us. Most editors cannot handle syntax highlighting for SQL within string variables):</p>
 
 </div>
 </div>
@@ -212,7 +212,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If you are using DB Browser for SQLite, you can should be able to open 'flights.db' and see the new table within your database.</p>
+<p>If you are using DB Browser for SQLite, you should now be able to open 'flights.db' and see the new table within your database.</p>
 
 </div>
 </div>
