@@ -136,7 +136,7 @@
     <span class="k">CONSTRAINT</span> <span class="n">hum_ck</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">humidity</span> <span class="k">BETWEEN</span> <span class="mi">0</span> <span class="k">AND</span> <span class="mi">100</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
-<p>We can (and should) define a 'primary key' constraint for the table. This is a similar concept to a pandas index and defines a field, or combination of fields, which must be unique for each record and which can then be used to perform efficient indexed searches of the table contents.</p>
+<p>We can (and should) define a 'primary key' constraint for the table. This is a similar concept to a pandas index and defines a field, or combination of fields, which must be unique for each record. The primary key can then be used by the DBMS to perform efficient indexed searches of the table contents.</p>
 <p>Again, the constraint has a name and this is commonly the name of the table followed by _pk:</p>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
     <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
