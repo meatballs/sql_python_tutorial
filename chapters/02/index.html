@@ -92,7 +92,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here is the SQL to create a suitable table with eight columns.</p>
+<p>We will now write the SQL to create a suitable table with eight columns for the flight name, a timestamp, measured values for temperature, pressure and humidity and some readings from an onboard accelerometer.</p>
 <p>For each column, we have to define its data type and here we have to be careful. Data types are not standardised across different DBMSs and so it is always worth taking the time to understand the data types available for whichever DBMS you are using. The <a href="https://www.sqlite.org/datatype3.html">SQLite documentation</a> has a full description of the types we will use in this tutorial.</p>
 <p><strong>NOTE:</strong> It is a common convention that SQL keywords are capitalised but this isn't strictly necessary in order to be valid SQL. It's largely redundant today since most editors will apply syntax highlighting to SQL but, for this tutorial, the convention is useful as we'll see shortly.</p>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
@@ -106,7 +106,7 @@
     <span class="n">accel_z</span>   <span class="nb">REAL</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-<p>Here, we used a variable length character (VARCHAR) datatype for the flight name and we set a maximum length for those strings of 10 characters. Most DBMSs have a VARCHAR data type (although they may use a different name) and also a type for holding strings of fixed length.</p>
+<p>We used a variable length character (VARCHAR) datatype for the flight name and we set a maximum length for those strings of 10 characters. Most DBMSs have a VARCHAR data type (although they may use a different name) and also a type for holding strings of fixed length.</p>
 <p><strong>TODO</strong> <em>Explain numeric data types</em></p>
 <p>For each column, we can also define whether a null value is allowed and, if not, whether we want a default value:</p>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
