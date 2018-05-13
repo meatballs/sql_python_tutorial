@@ -107,9 +107,11 @@
     <span class="n">accel_z</span>   <span class="nb">REAL</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-<p>We used a variable length character (VARCHAR) datatype for the flight name and we set a maximum length for those strings of 10 characters. Most DBMSs have a VARCHAR data type (although they may use a different name) and also a type for holding strings of fixed length.</p>
-<p><strong>TODO</strong> <em>Explain numeric data types</em></p>
-<p>For each column, we can also define whether a null value is allowed and, if not, whether we want a default value:</p>
+<p>We defined the flight name as a variable length character string (VARCHAR) and we set a maximum length for those strings of 10 characters. Most DBMSs have a VARCHAR data type (although they may use a different name) and also a type for holding strings of fixed length.</p>
+<p>The column 'ts' will hold the date and time of the reading.</p>
+<p>For the temperature, pressure and humidity values, we defined those to be numeric values with precision  (the maximum number of digits in the number) and scale (the number of digits following the decimal point). i.e. Temperature readings will have 3 digits in total with one of those to the right of the decimal point. Pressure and humidity readings will both be integers of 4 and 3 digits respectively.</p>
+<p>The accelerometer readings will be floating point numbers.</p>
+<p>By default, each column will allow null values but we can specify that nulls are not allowed and, optionally, whether a default value should be used instead:</p>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
     <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
     <span class="n">ts</span>        <span class="k">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
@@ -121,7 +123,8 @@
     <span class="n">accel_z</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-<p>We can also add constraints to each column so that the database will throw an error if any attempt is made to enter invalid values. These are know as CHECK constraints and each has a name - commonly the field to which the constraint applies followed by _ck:</p>
+<p>We can (and should) define a 'primary key' constraint for the table. This is a similar concept to a pandas index and defines a field, or combination of fields, which must be unique for each record. The primary key can then be used by the DBMS to perform efficient indexed searches of the table contents.</p>
+<p>The constraint is given a name which, by convention, is often suffixed with _pk but can be anything you like:</p>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
     <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
     <span class="n">ts</span>        <span class="k">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
@@ -132,13 +135,10 @@
     <span class="n">accel_y</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
     <span class="n">accel_z</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
 
-    <span class="k">CONSTRAINT</span> <span class="n">temp_ck</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">temp</span> <span class="k">BETWEEN</span> <span class="o">-</span><span class="mi">70</span> <span class="k">AND</span> <span class="mi">70</span><span class="p">),</span>
-    <span class="k">CONSTRAINT</span> <span class="n">pres_ck</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">pressure</span> <span class="k">BETWEEN</span> <span class="mi">0</span> <span class="k">AND</span> <span class="mi">2000</span><span class="p">),</span>
-    <span class="k">CONSTRAINT</span> <span class="n">hum_ck</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">humidity</span> <span class="k">BETWEEN</span> <span class="mi">0</span> <span class="k">AND</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="k">CONSTRAINT</span> <span class="n">readings_pk</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">flight</span><span class="p">,</span> <span class="n">ts</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
-<p>We can (and should) define a 'primary key' constraint for the table. This is a similar concept to a pandas index and defines a field, or combination of fields, which must be unique for each record. The primary key can then be used by the DBMS to perform efficient indexed searches of the table contents.</p>
-<p>Again, the constraint has a name and this is commonly the name of the table followed by _pk:</p>
+<p>We can also add constraints to each column so that the database will throw an error if any attempt is made to enter invalid values. These are know as CHECK constraints and again, each has a name - commonly the field to which the constraint applies followed by _ck:</p>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
     <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
     <span class="n">ts</span>        <span class="k">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
