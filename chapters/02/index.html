@@ -154,7 +154,8 @@
     <span class="k">CONSTRAINT</span> <span class="n">hum_ck</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">humidity</span> <span class="k">BETWEEN</span> <span class="mi">0</span> <span class="k">AND</span> <span class="mi">100</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
-<p>In order to execute an SQL statement, we can use the 'execute' method of our connection object which takes a string as its argument. Let's hold our table creation SQL in a triple quoted string variable and pass it to the connection method.</p>
+<p>In order to execute an SQL statement, we use the 'execute' method of our connection object and pass it our SQL statement as a string.</p>
+<p>Let's create a variable to hold our SQL statement and pass that variable to the execute method.</p>
 <p>(This technique is why the capitalisation convention is useful for us. Most editors cannot handle syntax highlighting for SQL within string variables):</p>
 
 </div>
