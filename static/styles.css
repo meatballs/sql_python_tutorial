@@ -9,6 +9,10 @@ body {
   margin-bottom: 60px;
 }
 
+.jumbotron {
+  border-radius: 1rem;
+}
+
 .gitter-chat-embed {
   margin-top: 100px;
 }
