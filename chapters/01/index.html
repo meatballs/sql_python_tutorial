@@ -67,7 +67,7 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For this tutorial, we'll be using the <a href="https://sqlite.org/index.html">SQLite</a> Database Management System (DBMS). SQLite support is built into the Python standard library and, because there is no server to install and configure, it's eminently suitable for the example code we'll be running.</p>
-<p>To communicate with our database, we'll be using the <a href="http://www.sqlalchemy.org/">sqlalchemy</a> Python library. Sqlalchemy is a comprehensive toolkit for working with databases within Python. It has two main components: its Core and its Object Relational Mapper (ORM). If you've ever written a Flask application, you will be familiar with the ORM but, for this tutorial, we'll be using the Core component to issue SQL commands directly to our sqlite database.</p>
+<p>To communicate with our database, we'll use the <a href="http://www.sqlalchemy.org/">sqlalchemy</a> Python library. Sqlalchemy is a comprehensive toolkit for working with databases within Python. It has two main components: the Core and the Object Relational Mapper (ORM). (If you've ever written a Flask application, you will be familiar with the ORM). For this tutorial, we'll use the Core component to issue SQL commands directly to our SQLite database.</p>
 <p>First, let's import the sqlalchemy libary:</p>
 
 </div>
@@ -90,8 +90,8 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Sqlalchemy uses an 'engine' object to interact with the database which you can create using a 'database url' string. The <a href="http://docs.sqlalchemy.org/en/latest/core/engines.html#database-urls">sqlalchemy documentation</a> has details on the different types of url you need to use for various DBMSs.</p>
-<p>SQLite uses a single file for each database and the url is essentially a path to that file. Our example database will contain data about High Altitude Balloon flights. Let's create an engine and call our database file 'flights.db:'</p>
+<p>Sqlalchemy uses an 'engine' object to interact with a database. You create an engine using a 'database url' string. The <a href="http://docs.sqlalchemy.org/en/latest/core/engines.html#database-urls">sqlalchemy documentation</a> has details on the different types of url you need to use for various DBMSs.</p>
+<p>SQLite uses a single file for each database and the url is a path to that file. Our example database will contain data about High Altitude Balloon flights. Let's create an engine and call our database file 'flights.db:'</p>
 
 </div>
 </div>
@@ -113,7 +113,8 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, we'll connect to our database using a 'connection' object. At this point, sqlalchemy will connect to a database if it already exists and, if not, it will create the database file and connect to it.</p>
+<p>Now, we'll connect to our database using a 'connection' object.</p>
+<p>At this point, sqlalchemy will connect to a database if it already exists and, if not, it will create the database file and connect to it.</p>
 
 </div>
 </div>
