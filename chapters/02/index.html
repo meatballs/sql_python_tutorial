@@ -93,7 +93,7 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here is the SQL to create a suitable table with eight columns.</p>
-<p>For each column, we have to define its data type and here we have to be careful. Data types are not standardised across different DBMSs.</p>
+<p>For each column, we have to define its data type and here we have to be careful. Data types are not standardised across different DBMSs and so it is always worth taking the time to understand the data types available for whichever DBMS you are using. The <a href="https://www.sqlite.org/datatype3.html">SQLite documentation</a> has a full description of the types we will use in this tutorial.</p>
 <p><strong>NOTE:</strong> It is a common convention that SQL keywords are capitalised but this isn't strictly necessary in order to be valid SQL. It's largely redundant today since most editors will apply syntax highlighting to SQL but, for this tutorial, the convention is useful as we'll see shortly.</p>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
     <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
