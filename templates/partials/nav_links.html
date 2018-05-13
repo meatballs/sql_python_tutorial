@@ -1,12 +1,10 @@
 <div class="row mt-3 mb-3">
-  {% if previous_url %}
-      <div class="col-sm">
-        <a class="btn btn-outline-primary btn-sm" href="../{{previous_url}}/"><i class="fa fa-backward fa-fw" aria-hidden="true"></i>&nbsp;Previous</a>
-    <!-- </div> -->
-  {% endif %}
-  {% if next_url %}
-      <!-- <div class="col-sm"> -->
-        <span class="float-right"><a class="btn btn-outline-primary btn-sm" href="../{{next_url}}/">Next&nbsp;<i class="fa fa-forward fa-fw" aria-hidden="true"></i></a></span>
-    </div>
-  {% endif %}
+  <div class="col-sm">
+    {% if previous_url %}
+    <a class="btn btn-outline-primary btn-sm" href="../{{previous_url}}/"><i class="fa fa-backward fa-fw" aria-hidden="true"></i>&nbsp;Previous</a>
+    {% endif %}
+    {% if next_url %}
+    <span class="float-right"><a class="btn btn-outline-primary btn-sm" href="../{{next_url}}/">Next&nbsp;<i class="fa fa-forward fa-fw" aria-hidden="true"></i></a></span>
+    {% endif %}
+  </div>
 </div>
