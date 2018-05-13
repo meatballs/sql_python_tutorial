@@ -9,6 +9,10 @@ body {
   margin-bottom: 60px;
 }
 
+.chat-containter {
+  padding-top: 100px;
+}
+
 .footer {
   padding-top: 10px;
   padding-bottom: 5px;
