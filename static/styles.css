@@ -9,8 +9,8 @@ body {
   margin-bottom: 60px;
 }
 
-.chat-container {
-  padding-top: 100px;
+.gitter-chat-embed {
+  margin-top: 100px;
 }
 
 .footer {
