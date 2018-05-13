@@ -108,7 +108,7 @@
 </pre></div>
 <p>Here, we used a variable length character (VARCHAR) datatype for the flight name and we set a maximum length for those strings of 10 characters. Most DBMSs have a VARCHAR data type (although they may use a different name) and also a type for holding strings of fixed length.</p>
 <p><strong>TODO</strong> <em>Explain numeric data types</em></p>
-<p>For each column, we can also define whether a null value is allowed and, if not, what the default value should be:</p>
+<p>For each column, we can also define whether a null value is allowed and, if not, whether we want a default value:</p>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
     <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
     <span class="n">ts</span>        <span class="k">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
