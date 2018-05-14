@@ -93,12 +93,13 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To add data, we use an SQL 'INSERT' statment. We specify the columns for which we have data and then the values for the record we want to create.</p>
+<p>To add data, we use an 'INSERT' statment.</p>
+<p>We specify the columns for which we have data and then the values for the record we want to create.</p>
 <p>In our case, we'll provide values for the flight name, timestamp and the teperature, pressure and humidity readings but we'll leave the accelerometer columns to have the default value of 0:</p>
 <div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">readings</span><span class="p">(</span><span class="n">flight</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">humidity</span><span class="p">)</span>
 <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span> <span class="s1">&#39;2015-01-01 09:00:00&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1020</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
 </pre></div>
-<p>We can execute that statement using the same technique as when we created table:</p>
+<p>Let's execute that statement:</p>
 
 </div>
 </div>
