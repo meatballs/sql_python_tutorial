@@ -68,8 +68,8 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So far, we have created a table and inserted three records into but we've only been able to see the results of what we've done if we are running the code on our own computer and we have the DB Browser for SQLite tool installed.</p>
-<p>Wouldn't it good if we could use Python to show us some results?</p>
+<p>So far, we have created a table and inserted three records into it.</p>
+<p>To see the results, we've had to install a separate piece of software. It would be much nicer to use Python to show us the content of our database.</p>
 <p>Let's connect to our database:</p>
 
 </div>
@@ -96,7 +96,12 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We'll use the <a href="https://pandas.pydata.org/">Pandas</a> library to import data from our database and view it in our Jupyter notebook.</p>
 <p>Pandas has a two dimensional structure called a 'dataframe' which has many similarities to a database table.</p>
-<p>It also has a 'read_sql' function which takes two arguments: a string which can be either a table name or an SQL 'SELECT' statment (more on those later) and an sqlalchemy connection object. read_sql returns a pandas dataframe object which we can then display.</p>
+<p>It also has a 'read_sql' function which takes two arguments:</p>
+<ul>
+<li>a table name</li>
+<li>an sqlalchemy connection object</li>
+</ul>
+<p><code>read_sql</code> returns a pandas dataframe which we can then display.</p>
 <p>First, let's import the pandas library:</p>
 
 </div>
@@ -119,7 +124,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And now we can pass the name of our 'readings' table and our connection object to read_sql:</p>
+<p>Now we can call <code>read_sql</code> and pass it the name of our table and our connection object:</p>
 
 </div>
 </div>
