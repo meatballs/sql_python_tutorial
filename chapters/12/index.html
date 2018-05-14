@@ -60,29 +60,62 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Bulk-Loading">Bulk Loading<a class="anchor-link" href="#Bulk-Loading">&#182;</a></h1>
+<h1 id="Bulk-Loading">Bulk Loading<a class="anchor-link" href="#Bulk-Loading">&#182;</a></h1><p>Previously, we inserted sixty records into the readings table but often we have much bigger sets of data.</p>
+<p>The 'flight-data.csv' contains data for over 200 000 readings. Let's learn how to load that into our database.</p>
+<p>First we connect to our database:</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">sa</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="n">engine</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///flight.db&#39;</span><span class="p">)</span>
 <span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;PRAGMA foreign_keys=on&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[30]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;sqlalchemy.engine.result.ResultProxy at 0x15763d588&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And then we load the contents of the file into a pandas dataframe:</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">flight_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;flight-data.csv&#39;</span><span class="p">)</span>
@@ -93,19 +126,34 @@
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's try using the same technique as when we loaded the sixty records in Chapter 3.</p>
+<p>We defined an INSERT statement using bound parameters and then looped over our dataset and executed that statement once for each record.</p>
+<p>We'll do that again now but with the loop inside a function that we call so that we can time it.</p>
+<p><strong>NOTE</strong> If you are using the online service, it is best not to run this example as it will take a significant length of time.</p>
+<p><strong>NOTE</strong> There are some errors in the humidity readings due to sensor glitches. We have to use Python's min and max functions to ensure we don't breach the constraints we created on our table.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-    <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        INSERT INTO readings</span>
-<span class="s2">            (flight, ts, temp, pressure, humidity,</span>
-<span class="s2">            accel_x, accel_y, accel_z)</span>
-<span class="s2">        VALUES</span>
-<span class="s2">            (&#39;hab1&#39;, ?, ?, ?, ?, ?, ?, ?)</span>
-<span class="s2">    &quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    INSERT INTO readings</span>
+<span class="s2">        (flight, ts, temp, pressure, humidity,</span>
+<span class="s2">        accel_x, accel_y, accel_z)</span>
+<span class="s2">    VALUES</span>
+<span class="s2">        (&#39;hab1&#39;, ?, ?, ?, ?, ?, ?, ?)</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+
     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
         <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="p">(</span>
             <span class="n">row</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">temp_h</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">pressure</span><span class="p">,</span>
@@ -131,7 +179,7 @@
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>5min 26s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+<pre>5min 38s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre>
 </div>
 </div>
@@ -140,28 +188,43 @@
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To understand why this technique takes so long to run, we need to understand database transactions.</p>
+<p>When you ask the DBMS to make a change to a table using an INSERT, UPDATE or DELETE statement, it will guarantee that:</p>
+<ul>
+<li>Atomicity - The entire change will either succeed or fail. It will never partially complete.</li>
+<li>Consistency - Your data will always be consistent. Your table constraints will never be violated.</li>
+<li>Isolation - Nobody else will see any of your changes until they have all completed.</li>
+<li>Durability - Once your changes are complete, they have been entirely written to the underlying storage.</li>
+</ul>
+<p>These guarantees are known as ACID transactions.</p>
+<p>You can make as many changes as you want within a single transaction. If, for example, it is important that records inserted into two tables must either succeed or fail together (e.g. an invoice header and invoice detail table in an accounting system), then it would be sensible to make those inserts within a single transaction.</p>
+<p>Unless told otherwise, SQLite creates a transaction for each and every INSERT, UPDATE and DELETE statement and, because it has to guarantee the durability, it has to write to to the database file each. This repeated disk writing is the reason our first example is slow.</p>
+<p>Instead, let's implicitly specify that all our inserts should take place in a single transaction, and therefore only one write to disk.</p>
+<p>We specify a transaction using our connection object's <code>begin</code> method:</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-    <span class="n">insert</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        INSERT INTO readings</span>
-<span class="s2">            (flight, ts, temp, pressure, humidity,</span>
-<span class="s2">            accel_x, accel_y, accel_z)</span>
-<span class="s2">        VALUES</span>
-<span class="s2">            (&#39;hab1&#39;, ?, ?, ?, ?, ?, ?, ?)</span>
-<span class="s2">    &quot;&quot;&quot;</span>
+
     <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
-            <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">insert</span><span class="p">,</span> <span class="p">(</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="p">(</span>
                 <span class="n">row</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">temp_h</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">pressure</span><span class="p">,</span>
                 <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">humidity</span><span class="p">)),</span>
                 <span class="n">row</span><span class="o">.</span><span class="n">accel_x</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">accel_y</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">accel_z</span>
             <span class="p">))</span>
             
-<span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM readings&quot;</span><span class="p">)</span>     
+<span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM readings&quot;</span><span class="p">)</span>
 <span class="o">%</span><span class="k">timeit</span> -n1 -r1 load_data(connection, flight_data)
 </pre></div>
 
@@ -179,7 +242,7 @@
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>12 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+<pre>11.4 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre>
 </div>
 </div>
@@ -188,19 +251,23 @@
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You should see a huge drop in the amount of time it takes to execute this second example.</p>
+<p>But we can do better. At the moment, we are using a for loop to iterate over the pandas dataframe. Instead, let's use a list comprehension:</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-    <span class="n">insert</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        INSERT INTO readings</span>
-<span class="s2">            (flight, ts, temp, pressure, humidity,</span>
-<span class="s2">            accel_x, accel_y, accel_z)</span>
-<span class="s2">        VALUES</span>
-<span class="s2">            (&#39;hab1&#39;, ?, ?, ?, ?, ?, ?, ?)</span>
-<span class="s2">    &quot;&quot;&quot;</span>
+
     <span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">temp_h</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">pressure</span><span class="p">,</span>
          <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">humidity</span><span class="p">)),</span>
@@ -208,7 +275,7 @@
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">itertuples</span><span class="p">()</span>
     <span class="p">]</span>
     <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
-        <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">insert</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         
 <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM readings&quot;</span><span class="p">)</span>     
 <span class="o">%</span><span class="k">timeit</span> -n1 -r1 load_data(connection, flight_data)
@@ -228,7 +295,55 @@
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>3.2 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+<pre>3.02 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On my laptop, that's now 100x faster than our first example and 4x faster than the second.</p>
+<p>Finally, although this tutorial focuses on learning SQL, it is worth noting that a pandas dataframe can be loaded directly into a database table using the <code>to_sql</code> method.</p>
+<p>We need to tidy up the dataframe first, but let's see how that performs:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">flight_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;temp_p&#39;</span><span class="p">,</span> <span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="s1">&#39;mag_x&#39;</span><span class="p">,</span> <span class="s1">&#39;mag_y&#39;</span><span class="p">,</span> <span class="s1">&#39;mag_z&#39;</span><span class="p">,</span> <span class="s1">&#39;gyro_x&#39;</span><span class="p">,</span> <span class="s1">&#39;gyro_y&#39;</span><span class="p">,</span> <span class="s1">&#39;gyro_z&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">flight_data</span><span class="p">[</span><span class="s1">&#39;humidity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">flight_data</span><span class="p">[</span><span class="s1">&#39;humidity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">flight_data</span> <span class="o">=</span> <span class="n">flight_data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;temp_h&#39;</span><span class="p">:</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;ts&#39;</span><span class="p">})</span>
+<span class="n">flight_data</span><span class="p">[</span><span class="s1">&#39;flight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;hab1&#39;</span>
+
+<span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM readings&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> -n1 -r1 flight_data.to_sql(&#39;readings&#39;, connection, if_exists=&#39;append&#39;, index=False)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>5.53 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre>
 </div>
 </div>
