@@ -301,6 +301,56 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can see that the third record now has the updated pressure and humidity values and the first two records are unchanged.</p>
+<p>We've seen previously that the check constraints on our table ensure that any record we try to insert must be valid. What happens if we attempt to update an existing record with invalid values?</p>
+<p>Let's try changing one of our humidity values to a negative number:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    UPDATE readings</span>
+<span class="s2">    SET humidity = -40</span>
+<span class="s2">    WHERE flight = &#39;hab1&#39; and humidity = 41</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(sqlite3.IntegrityError) CHECK constraint failed: hum_ck [SQL: &#34;\n    UPDATE readings\n    SET humidity = -40\n    WHERE flight = &#39;hab1&#39; and humidity = 41\n&#34;] (Background on this error at: http://sqlalche.me/e/gkpj)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once again, sqlalchemy raises an IntegrityError, our update fails and the check constraint has stopped us creating invalid records.</p>
 
 </div>
 </div>
