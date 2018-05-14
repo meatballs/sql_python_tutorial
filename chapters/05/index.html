@@ -183,7 +183,8 @@
 <div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">readings</span>
 <span class="k">SET</span> <span class="n">pressure</span> <span class="o">=</span> <span class="mi">1021</span><span class="p">,</span> <span class="n">humidity</span> <span class="o">=</span> <span class="mi">42</span>
 </pre></div>
-<p>If we were to run this statement, it would update all the records in our table but let's imagine we only wanted to change one of them. To do that, we need to include a 'WHERE' clause which will restrict the operation of our UPDATE statement to only those records matching the condition we define :</p>
+<p>If we were to run this statement, it would update all the records in our table.</p>
+<p>Let's imagine we only wanted to change one of them. To do that, we need to include a 'WHERE' clause:</p>
 <div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">readings</span>
 <span class="k">SET</span> <span class="n">pressure</span> <span class="o">=</span> <span class="mi">1021</span><span class="p">,</span> <span class="n">humidity</span> <span class="o">=</span> <span class="mi">42</span>
 <span class="k">WHERE</span> <span class="n">flight</span> <span class="o">=</span> <span class="s1">&#39;hab1&#39;</span> <span class="k">and</span> <span class="n">humidity</span> <span class="o">=</span> <span class="mi">41</span>
@@ -299,7 +300,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see that the third record in our table now has the updated pressure and humidity values that we defined in our UPDATE statement and the first two records are unchanged.</p>
+<p>We can see that the third record now has the updated pressure and humidity values and the first two records are unchanged.</p>
 
 </div>
 </div>
