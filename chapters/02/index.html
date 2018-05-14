@@ -68,9 +68,8 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In a relational database, data is held in a 2-dimensional structure with rows and columns called a 'table.' If you're familiar with the Pandas library, this is similar to a dataframe (a fact we will put to good use shortly) or, if you've used a spreadsheet program, it's similar to a single sheet.</p>
-<p>Each row in a table contains a 'record' and the individual columns are often referred to as 'fields.'</p>
-<p>We'll create a table to hold readings of temperature and pressure taken during balloon flights. First, let's connect to our database:</p>
+<p>Before we can add any data to our database, we'll need to create a table in which to hold it.</p>
+<p>First, let's connect to our database:</p>
 
 </div>
 </div>
@@ -94,10 +93,25 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We will now write the SQL to create a suitable table with eight columns for the flight name, a timestamp, measured values for temperature, pressure and humidity and some readings from an onboard accelerometer.</p>
-<p>In most DBMSs, we have to define the data type for each column but SQLite handles this differently. For the purposes of this tutorial, we will define data types in a manner that is common for all other DBMS engines.</p>
-<p>For a full description of exactly how SQLite differs, you can read the <a href="https://www.sqlite.org/datatype3.html">SQLite documentation</a>.</p>
+<p>We want to hold readings of temperature and pressure taken during balloon flights.</p>
+<p>We'll use a table with eight columns for the flight name, a timestamp, measured values for temperature, pressure and humidity and some readings from an onboard accelerometer.</p>
+<p>Here's the sql to create that table:</p>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
+    <span class="n">flight</span><span class="p">,</span>
+    <span class="n">ts</span><span class="p">,</span>
+    <span class="n">temp</span><span class="p">,</span>
+    <span class="n">pressure</span><span class="p">,</span>
+    <span class="n">humidity</span><span class="p">,</span>
+    <span class="n">accel_x</span><span class="p">,</span>
+    <span class="n">accel_y</span><span class="p">,</span>
+    <span class="n">accel_z</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
 <p><strong>NOTE:</strong> It is a common convention that SQL keywords are capitalised but this isn't strictly necessary in order to be valid SQL. It's largely redundant today since most editors will apply syntax highlighting to SQL but, for this tutorial, the convention is useful as we'll see shortly.</p>
+<p>Although this SQL statement would work perfectly in SQLite, it is non-standard and wouldn't work in any other DBMS.</p>
+<p>In most DBMSs, we have to define the data type for each column. For the purposes of this tutorial, we'll write SQL that conforms to the standard and would work in any DBMS including SQLite.</p>
+<p>For a full description of exactly how SQLite differs, you can read the <a href="https://www.sqlite.org/datatype3.html">SQLite documentation</a>.</p>
+<p>Here's the standard form of the SQL to create our table with the data types included:</p>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
     <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
     <span class="n">ts</span>        <span class="k">TIMESTAMP</span><span class="p">,</span>
@@ -109,9 +123,11 @@
     <span class="n">accel_z</span>   <span class="nb">REAL</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-<p>We defined the flight name as a variable length character string (VARCHAR) and we set a maximum length for those strings of 10 characters. Most DBMSs have a VARCHAR data type (although they may use a different name) and also a type for holding strings of fixed length.</p>
+<p>We defined the flight name as a variable length character string (VARCHAR) and we set a maximum length for those strings of 10 characters.</p>
+<p>Most DBMSs have a VARCHAR data type (although they may use a different name) and also a type for holding strings of fixed length.</p>
 <p>The column 'ts' will hold the date and time of the reading.</p>
-<p>For the temperature, pressure and humidity values, we defined those to be numeric values with precision  (the maximum number of digits in the number) and scale (the number of digits following the decimal point). i.e. Temperature readings will have 3 digits in total with one of those to the right of the decimal point. Pressure and humidity readings will both be integers of 4 and 3 digits respectively.</p>
+<p>For the temperature, pressure and humidity values, we defined those to be numeric values with precision  (the maximum number of digits in the number) and scale (the number of digits following the decimal point).</p>
+<p>i.e. Temperature readings will have 3 digits in total with one of those to the right of the decimal point. Pressure and humidity readings will both be integers of 4 and 3 digits respectively.</p>
 <p>The accelerometer readings will be floating point numbers.</p>
 <p>By default, each column will allow null values but we can specify that nulls are not allowed and, optionally, whether a default value should be used instead:</p>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
@@ -125,7 +141,7 @@
     <span class="n">accel_z</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-<p>We can (and should) define a 'primary key' constraint for the table. This is a similar concept to a pandas index and defines a field, or combination of fields, which must be unique for each record. The primary key can then be used by the DBMS to perform efficient indexed searches of the table contents.</p>
+<p>We can (and should) define a 'primary key' constraint for the table. This defines a field, or combination of fields, which must be unique for each record. The primary key can then be used by the DBMS to perform efficient indexed searches of the table contents.</p>
 <p>The constraint is given a name which, by convention, is often suffixed with _pk but can be anything you like:</p>
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
     <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
