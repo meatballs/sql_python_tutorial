@@ -69,7 +69,7 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">sa</span>
@@ -87,23 +87,24 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And now, let's create a table to hold a name for each flight along with the latitude and longitude of where that flight took place:</p>
+<p>And now, let's create a table to hold a name for each flight along with the country code, latitude and longitude of where that flight took place:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">CREATE TABLE flights (</span>
-<span class="s2">    flight        VARCHAR(10) NOT NULL,</span>
+<span class="s2">    name          VARCHAR(10) NOT NULL,</span>
+<span class="s2">    country_code  VARCHAR(2) NOT NULL,</span>
 <span class="s2">    latitude      REAL NOT NULL DEFAULT 0.0,</span>
 <span class="s2">    longitude     REAL NOT NULL DEFAULT 0.0,</span>
 
-<span class="s2">    CONSTRAINT flights_pk PRIMARY KEY (flight),</span>
+<span class="s2">    CONSTRAINT flights_pk PRIMARY KEY (name),</span>
 <span class="s2">    CONSTRAINT lat_ck CHECK (latitude BETWEEN -90 AND 90),</span>
 <span class="s2">    CONSTRAINT long_ck CHECK (longitude BETWEEN -180 AND 180)</span>
 <span class="s2">)</span>
@@ -121,13 +122,13 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[17]:</div>
+<div class="prompt output_prompt">Out[75]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;sqlalchemy.engine.result.ResultProxy at 0x10b1acf60&gt;</pre>
+<pre>&lt;sqlalchemy.engine.result.ResultProxy at 0x111d6b710&gt;</pre>
 </div>
 
 </div>
@@ -157,13 +158,13 @@
     <span class="k">CONSTRAINT</span> <span class="n">temp_ck</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">temp</span> <span class="k">BETWEEN</span> <span class="o">-</span><span class="mi">70</span> <span class="k">AND</span> <span class="mi">70</span><span class="p">),</span>
     <span class="k">CONSTRAINT</span> <span class="n">pres_ck</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">pressure</span> <span class="k">BETWEEN</span> <span class="mi">0</span> <span class="k">AND</span> <span class="mi">2000</span><span class="p">),</span>
     <span class="k">CONSTRAINT</span> <span class="n">hum_ck</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">humidity</span> <span class="k">BETWEEN</span> <span class="mi">0</span> <span class="k">AND</span> <span class="mi">100</span><span class="p">),</span>
-    <span class="k">CONSTRAINT</span> <span class="n">flights_fk</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">flight</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">flights</span><span class="p">(</span><span class="n">flight</span><span class="p">)</span>
+    <span class="k">CONSTRAINT</span> <span class="n">flights_fk</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">flight</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">flights</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
-<p><code>CONSTRAINT flights_fk FOREIGN KEY (flight) REFERENCES flights(flight)</code> can be read as:</p>
+<p><code>CONSTRAINT flights_fk FOREIGN KEY (flight) REFERENCES flights(name)</code> can be read as:</p>
 <ul>
 <li>Create a constraint and name it 'flights_fk'</li>
 <li>It's a foreign key constraint on the 'flight' column in this table</li>
-<li>Any value in the flight column must refer to a value in the 'flight' column on the 'flights' table</li>
+<li>Any value in the flight column must refer to a value in the 'name' column on the 'flights' table</li>
 </ul>
 <p>But what if we have readings for a flight which we then delete? That would break the constraint we just defined.</p>
 <p>We can specify what should happen in the readings table when a record in the flights table is updated or deleted.</p>
@@ -174,7 +175,7 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -193,7 +194,7 @@
 <span class="s2">    CONSTRAINT pres_ck CHECK (pressure BETWEEN 0 AND 2000),</span>
 <span class="s2">    CONSTRAINT hum_ck CHECK (humidity BETWEEN 0 AND 100),</span>
 <span class="s2">    CONSTRAINT flights_fk FOREIGN KEY (flight)</span>
-<span class="s2">        REFERENCES flights(flight) ON DELETE CASCADE</span>
+<span class="s2">        REFERENCES flights(name) ON DELETE CASCADE</span>
 <span class="s2">)</span>
 <span class="s2">&quot;&quot;&quot;</span>
 <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
@@ -209,13 +210,13 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[18]:</div>
+<div class="prompt output_prompt">Out[76]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;sqlalchemy.engine.result.ResultProxy at 0x10b1f35c0&gt;</pre>
+<pre>&lt;sqlalchemy.engine.result.ResultProxy at 0x10b10b630&gt;</pre>
 </div>
 
 </div>
@@ -235,7 +236,7 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;PRAGMA foreign_keys=on&quot;</span><span class="p">)</span>
@@ -251,13 +252,13 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[20]:</div>
+<div class="prompt output_prompt">Out[77]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;sqlalchemy.engine.result.ResultProxy at 0x10b1f3710&gt;</pre>
+<pre>&lt;sqlalchemy.engine.result.ResultProxy at 0x111d6b7f0&gt;</pre>
 </div>
 
 </div>
@@ -277,7 +278,7 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
@@ -339,10 +340,10 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO flights(flight) VALUES (&#39;hab1&#39;)&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO flights(name, country_code) VALUES (&#39;hab1&#39;, &#39;GB&#39;)&quot;</span><span class="p">)</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;flights&#39;</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
 </pre></div>
 
@@ -356,7 +357,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[70]:</div>
+<div class="prompt output_prompt">Out[79]:</div>
 
 
 
@@ -379,7 +380,8 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>flight</th>
+      <th>name</th>
+      <th>country_code</th>
       <th>latitude</th>
       <th>longitude</th>
     </tr>
@@ -388,6 +390,7 @@
     <tr>
       <th>0</th>
       <td>hab1</td>
+      <td>GB</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
@@ -413,7 +416,7 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">reading</span> <span class="ow">in</span> <span class="n">readings</span><span class="p">:</span>
@@ -432,7 +435,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[71]:</div>
+<div class="prompt output_prompt">Out[80]:</div>
 
 
 
@@ -521,10 +524,10 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO flights(flight) VALUES (&#39;hab2&#39;)&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO flights(name, country_code) VALUES (&#39;hab2&#39;, &#39;GB&#39;)&quot;</span><span class="p">)</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;flights&#39;</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
 </pre></div>
 
@@ -538,7 +541,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[72]:</div>
+<div class="prompt output_prompt">Out[82]:</div>
 
 
 
@@ -561,7 +564,8 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>flight</th>
+      <th>name</th>
+      <th>country_code</th>
       <th>latitude</th>
       <th>longitude</th>
     </tr>
@@ -570,12 +574,14 @@
     <tr>
       <th>0</th>
       <td>hab1</td>
+      <td>GB</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>hab2</td>
+      <td>GB</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
@@ -601,7 +607,7 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">reading</span> <span class="ow">in</span> <span class="n">readings</span><span class="p">:</span>
@@ -620,7 +626,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[73]:</div>
+<div class="prompt output_prompt">Out[83]:</div>
 
 
 
@@ -742,10 +748,10 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM flights where flight = &#39;hab2&#39;&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM flights where name = &#39;hab2&#39;&quot;</span><span class="p">)</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;flights&#39;</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
 </pre></div>
 
@@ -759,7 +765,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[43]:</div>
+<div class="prompt output_prompt">Out[84]:</div>
 
 
 
@@ -782,7 +788,8 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>flight</th>
+      <th>name</th>
+      <th>country_code</th>
       <th>latitude</th>
       <th>longitude</th>
     </tr>
@@ -791,6 +798,7 @@
     <tr>
       <th>0</th>
       <td>hab1</td>
+      <td>GB</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
@@ -816,7 +824,7 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;readings&#39;</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
@@ -832,7 +840,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[44]:</div>
+<div class="prompt output_prompt">Out[85]:</div>
 
 
 
