@@ -225,6 +225,14 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's extract and display the readings for flight hab2.</p>
 <p>We've seen previously that we can pass a table name to <code>read_sql</code>. Now, we'll see that we can also pass a SELECT statement:</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">flight</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">humidity</span>
+<span class="k">FROM</span> <span class="n">readings</span>
+<span class="k">WHERE</span> <span class="n">flight</span> <span class="o">=</span> <span class="s1">&#39;hab2&#39;</span>
+</pre></div>
+<p>The SELECT clause defines the columns we want to see.</p>
+<p>The FROM clause defines the table(s) we want to query.</p>
+<p>We've seen the WHERE clause used previously in INSERT, UPDATE and DELETE statements. It applies a filter for us to define the records we want returned.</p>
+<p>Let's run that query:</p>
 
 </div>
 </div>
@@ -458,9 +466,6 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The SELECT clause defines the columns we want to see.</p>
-<p>The FROM clause defines the table(s) we want to query.</p>
-<p>We've seen the WHERE clause used previously in INSERT, UPDATE and DELETE statements. It applies a filter for us to define the records we want returned.</p>
 <p>Let's try another example where we might be interested only in the temperature of readings taken before 09:15:</p>
 
 </div>
