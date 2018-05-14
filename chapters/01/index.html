@@ -72,7 +72,7 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">sa</span>
@@ -90,7 +90,7 @@
 <p>Sqlalchemy uses an "engine" object to interact with a database.</p>
 <p>To create an engine, we first need to choose a Database Management System (DBMS). We'll use <a href="https://sqlite.org/index.html">SQLite</a> as our DBMS.</p>
 <p>Next, we have to define a connection URL. The URL tells sqlalchemy which DBMS we have chosen and how to connect to our database.</p>
-<p>SQLite uses a single file for each database and the structure of the URL for sqlalchemy is:</p>
+<p>SQLite uses a single file for each database and the structure of the URL we need for sqlalchemy is:</p>
 
 <pre><code>sqlite:///&lt;path the database file&gt;</code></pre>
 <p>Our example database will contain data about High Altitude Balloon flights. Let's name our database file <code>flight.db</code> and create an engine object for it:</p>
@@ -100,7 +100,7 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///flight.db&#39;</span><span class="p">)</span>
@@ -115,15 +115,15 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, we'll connect to our database using a "connection" object.</p>
-<p>At this point, sqlalchemy will connect to a database if it already exists and, if not, it will create the database file and then connect to it.</p>
+<p>We can now connect to our database using the <code>connect()</code> method of our engine.</p>
+<p>Sqlalchemy will look for the file we specified in our URL and establish a connection to our database. If the file doesn't exist, sqlalchemy will create and then make the connection.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
@@ -138,7 +138,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>You should now be able to see a new 'flights.db' file in the same directory as this notebook.</p>
+<p>You should now be able to see a new 'flight.db' file in the same directory as this notebook.</p>
 <p>If you are running the code on your own computer and opted to install <a href="http://sqlitebrowser.org/">DB Browser for SQLite</a>, you can also now start that program and open your new 'flight.db' file.</p>
 
 </div>
