@@ -2315,3 +2315,7 @@ div#notebook {
     page-break-inside: avoid;
   }
 }
+
+.dataframe {
+  overflow-x: auto
+}
