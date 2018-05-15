@@ -75,11 +75,15 @@ def make_collection(paths, directory,
 
     number_of_paths = len(paths)
     for index, filename in enumerate(paths):
-        previous_path = paths[(index - 1) % number_of_paths]
-        previous_id = get_id(previous_path)
+        previous_id = None
+        if index > 0:
+          previous_path = paths[(index - 1) % number_of_paths]
+          previous_id = get_id(previous_path)
 
-        next_path = paths[(index + 1) % number_of_paths]
-        next_id = get_id(next_path)
+        next_id = None
+        if index + 1 < number_of_paths:
+          next_path = paths[(index + 1) % number_of_paths]
+          next_id = get_id(next_path)
 
         make_dir(pathlib.Path(filename), directory=directory,
                  previous_url=previous_id,
