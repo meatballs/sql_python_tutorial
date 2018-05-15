@@ -20,7 +20,7 @@ body {
 .footer {
   padding-top: 10px;
   padding-bottom: 5px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   height: auto;
