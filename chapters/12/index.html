@@ -827,7 +827,7 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>By default, <code>to_sql</code> will place all the insert statements into a single transaction so this is far more efficient than our first example.</p>
 <p>Pandas will also iterate over our dataframe more efficiently than the for loop in our second example.</p>
-<p>However, pandas generates an insert statement for each row and passes those to the DBMS. Our third example is faster because we used an SQL statement with bound parameters. We are passing the SQL statement and the data over to the DBMS and asking it handle those as best it can. A DBMS is designed to handle just that sort of task efficiently and so it's faster than pandas generating the SQL itself.</p>
+<p>However, pandas generates an insert statement for each row and passes those to the DBMS for execution. Our third example is faster because we used an SQL statement with bound parameters. We are passing that single SQL statement to the DBMS, along with the relevant data, and asking it handle those as best it can. A DBMS is designed to handle just that sort of task efficiently and so it's faster than pandas generating the insert statements itself.</p>
 
 </div>
 </div>
