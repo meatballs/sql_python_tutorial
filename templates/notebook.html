@@ -4,12 +4,14 @@
     <link rel="stylesheet" href="http://owencampbell.me.uk/sql_python_tutorial/static/notebook.css">
   {% endblock %}
 
-  {% block body %}
+  {% block navlinks %}
     {% include 'partials/nav_links.html' %}
+  {% endblock %}
+
+  {% block body %}
 
     <div class="row">
       <div class="col-sm-12">{{ nb }}</div>
     </div>
 
-    {% include 'partials/nav_links.html' %}
   {% endblock %}
