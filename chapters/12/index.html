@@ -193,7 +193,7 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To understand why this technique takes so long to run, we need to understand database transactions.</p>
-<p>When you ask the DBMS to make a change to a table using an INSERT, UPDATE or DELETE statement, it will guarantee that:</p>
+<p>When you ask the DBMS to make a change to a table using an INSERT, UPDATE or DELETE statement, it will guarantee:</p>
 <ul>
 <li>Atomicity - The entire change will either succeed or fail. It will never partially complete.</li>
 <li>Consistency - Your data will always be consistent. Your table constraints will never be violated.</li>
@@ -202,8 +202,8 @@
 </ul>
 <p>These guarantees are known as ACID transactions.</p>
 <p>You can make as many changes as you want within a single transaction. If, for example, it is important that records inserted into two tables must either succeed or fail together (e.g. an invoice header and invoice detail table in an accounting system), then it would be sensible to make those inserts within a single transaction.</p>
-<p>Unless told otherwise, SQLite creates a transaction for each and every INSERT, UPDATE and DELETE statement and, because it has to guarantee the durability, it has to write to to the database file each. This repeated disk writing is the reason our first example is slow.</p>
-<p>Instead, let's implicitly specify that all our inserts should take place in a single transaction, and therefore only one write to disk.</p>
+<p>Unless told otherwise, SQLite creates a transaction for each and every INSERT, UPDATE and DELETE statement. Because it has to guarantee the durability, it has to write to to the database file each time. This repeated disk writing is the reason our first example is slow.</p>
+<p>Instead, let's explicitly specify that all our inserts should take place in a single transaction. This will ensure there is only one disk write for the entire task.</p>
 <p>We specify a transaction using our connection object's <code>begin</code> method:</p>
 
 </div>
