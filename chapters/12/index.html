@@ -731,6 +731,7 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You should see a huge drop in the amount of time it takes to execute this second example.</p>
+<p><strong>NOTE</strong> <em>The DELETE statement in the previous example is outside the transacation so that we have a fair time comparison with the first example. However, this means that, if any problem occurs with the inserts, the table will be left empty because the delete will already have succeeded. In the real world, it's likely that you would want the delete to be included in the same transaction as the inserts.</em></p>
 <p>But we can do better. At the moment, we are using a for loop to iterate over the pandas dataframe. Instead, let's use a <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">list comprehension</a>:</p>
 
 </div>
