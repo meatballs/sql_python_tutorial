@@ -49,15 +49,23 @@
   <p>This tutorial is designed to help Python programmers (of any level of experience) who have little or no knowledge of relational databases and SQL.</p>
   <p>If you are a database administrator or an SQL expert, you may find some tricks for how to use SQL within Python, but if you are looking for material on advanced SQL, this is probably not the place to find it.</p>
 
+  <h2>Why Learn SQL?</h2>
+  <p>It is perfectly possible to use a relational database in your Python programs without learning any SQL at all and many people have done so. There are several excellent Object Relational Mapper (ORM) libraries that will auto-generate and execute SQL for you from pure Python code.
+  <p>However, a modern relational database is an extremely powerful tool and, if you want to use it to its full capability, you'll need to learn its language: SQL</p>
+  <p>A good analogy is Javascript. It's perfectly possible to write web applications without learning any Javascript at all. Again, there are libraries that will handle things for you. But if you want to take full advantage of a modern browser, you really need to learn the languages it uses: HTML5, Javascript and CSS.</p>
+  <p>Even if you mostly continue to use an ORM, a knowledge of what it's doing for you can be invaluable if you ever want to intervene and do things slightly differently</p>
+  <p>There are also situations where using SQL is far more efficient than Python. If your database resides on a server and your Python code executes on a different machine, any data you want to process has to be sent across some kind of network connection. Any filtering or aggregation that's needed is far better executed on the database server so that only the required data is sent across the network. If your process is to extract some data, manipulate it in some way and send it straight back to the database for persistence, that will almost always be more efficient if you issue SQL statements to the database server than bringing the data across the network and sending the results back again.</p>
+
   <h2>Knowledge You Will Need</h2>
   <p>The tutorial assumes no knowledge of SQL at all and starts from the very basics. You will need some basic understanding of Python code although most of the content is suitable for Python beginners too. Where the Python code strays into more advanced concepts, there are links to the relevant documentation for you to follow.</p>
   <p>If you choose to use your own computer to run the tutorial code (details on those options are described in the <a href="/sql_python_tutorial/pages/howto">How To</a>), you will need to be comfortable using a command line terminal.</p>
+
 
   <h2>How To Contribute</h2>
   <p>The code for this tutorial is hosted at <a href="https://github.com/meatballs/sql_python_tutorial">Github</a> with a <a href="https://github.com/meatballs/sql_python_notebooks">separate repository</a> for the Jupyter notebooks. Please feel free to report any <a href="https://github.com/meatballs/sql_python_tutorial/issues">issues</a> that you find or to submit a <a href="https://github.com/meatballs/sql_python_tutorial/pulls">pull request</a> for any changes you would like to suggest.</p>
 
   <h2>About the Author</h2>
-  <p>Owen Campbell is a freelance Chartered Engineer with several decades of experience working mainly with finance and accounting departments of medium and large sized organisations.</p>
+  <p>Owen Campbell is a freelance Chartered Engineer with many years' experience working mainly with finance and accounting departments of medium and large sized organisations.</p>
   <p>He is a founding trustee of <a href="http://uk.python.org/">The UK Python Association</a> and one of the <a href="http://pyconuk.org/">PyCon UK</a> organisers.</p>
   <p>If you would like to hire him to work with your own organisation, use the social media links at the top of this page, the chat tool at the bottom, or this <a href=http://www.owencampbell.me.uk/pages/contact.html">contact form</a> to get in touch.</p>
 
