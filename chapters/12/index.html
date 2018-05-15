@@ -62,7 +62,7 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Bulk-Loading">Bulk Loading<a class="anchor-link" href="#Bulk-Loading">&#182;</a></h1><p>Previously, we inserted sixty records into the readings table but often we have much bigger sets of data.</p>
 <p>The <a href="http://www.owencampbell.me.uk/sql_python_tutorial/pages/howto#flight-data-file">flight-data.csv</a> file contains data for over 200 000 readings. Let's learn how to load that into our database.</p>
-<p>First we connect to our database:</p>
+<p>First we connect:</p>
 
 </div>
 </div>
@@ -678,7 +678,7 @@
 </ul>
 <p>These guarantees are known as ACID transactions.</p>
 <p>You can make as many changes as you want within a single transaction. If, for example, it is important that records inserted into two tables must either succeed or fail together (e.g. an invoice header and invoice detail table in an accounting system), then it would be sensible to make those inserts within a single transaction.</p>
-<p>Unless told otherwise, SQLite creates a transaction for each and every INSERT, UPDATE and DELETE statement. Because it has to guarantee the durability, it has to write to to the database file each time. This repeated disk writing is the reason our first example is slow.</p>
+<p>Unless told otherwise, SQLite creates a transaction for each and every INSERT, UPDATE and DELETE statement. Because it has to guarantee the durability, it has to write to the database file each time. This repeated disk writing is the reason our first example is slow.</p>
 <p>Instead, let's explicitly specify that all our inserts should take place in a single transaction. This will ensure there is only one disk write for the entire task.</p>
 <p>We specify a transaction using our connection object's <code>begin</code> method:</p>
 
