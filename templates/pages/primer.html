@@ -2,4 +2,43 @@
 
 {% block body %}
   <h1><i class="fa fa-database" aria-hidden="true"></i> Primer</h1>
+
+  <h2>1. What Is A Relational Database?</h2>
+  <p>A relational database organises a collection of data into tables. A table is a two-dimensional structure with rows and columns. Rows are often also referred to as records and columns as fields or attributes.</p>
+  <p>Relationships can be established between tables by specifying how a value in a column of one table matches the values in a column of a second table.</p>
+
+  <h2>2. What IS A DBMS?</h2>
+  <p>A Database Management System (DBMS) is a software program used to manage and maintain a database.</p>
+  <p>Strictly speaking, a DBMS for a relational database is called a Relational Database Management System (RDBMS), but use of the shorter from is widespread.</p>
+  <p>Typically, a DBMS will use its own proprietary format for persisting databases (e.g. to disk) and provde a standard interface for interacting with those files.</p>
+
+  <h2>3. What are the differences between DBMSs?</h2>
+  <p>A client-server DBMS typically manages the databases on its server side and provides an SQL interface via client software. These may be installed on entirely separate computers with a network connection between them.</p>
+  <p>An embedded DBMS provides both interface and database management in the same software package. Typically, both the software and any database files reside on the same computer.</p>
+
+  <h2>4. What is SQL?</h2>
+  <p>Structured Query Language (SQL) is a language for managing data within a relational database. It is a standard adopted by both the American National Standard Institute (ANSI) and the International Organisation for Standardisation (ISO).</p>
+  <p>Any modern DBMS will provide an SQL interface for interaction with a database under its management, regardless of how that database is persisted.</p>
+
+  <h2>5. What DBMS Can I Use?</h2>
+  <p>There are many relational DBMSs on the market today. Here are some of the more well known:</p>
+
+  <h3>5.1. Client-Server</h3>
+  <ul>
+    <li><a href="https://postgresql.org">PostgreSQL</a> (Open Source)</li>
+    <li><a href="https://www.mysql.com">MySQL</a> (Open Source)</li>
+    <li><a href="https://www.oracle.com/database/">Oracle</a> (Commercial)</li>
+    <li><a href="https://microsoft.com/en-us/sql-server/">Microsoft SQL Server
+    (Commercial)</a></li>
+  </ul>
+
+  <h3>5.2. Embedded</h3>
+  <ul>
+    <li><a href="https://sqlite.org">SQLite</a> (Open Source)</li>
+    <li><a href="https://office.microsoft.com/access/">Microsoft Access</a> (Commercial)</li>
+  </ul>
+
+  <h2>6. What Else Do I Need To Know?</h2>
+  <p>Although any modern DBMS will implement standard SQL, all of them go way beyond the standard to provide more advanced capabilities. Unfortunately, those enhancements are not standardised and will not port from one DBMS to another.</p>
+  <p>For example, here is <a href="http://www.owencampbell.me.uk/oracle-update-statements.html">an article</a> written by the author of this tutorial on how to update the contents of one table based on the content of another in an Oracle database. None of the techniques described in that article would execute successfully on any other DBMS.</p>
 {% endblock %}
