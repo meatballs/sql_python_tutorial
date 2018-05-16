@@ -16,9 +16,11 @@
   </head>
 
   <body>
-    {% include "partials/header.html" %}
-    {% block navlinks %}
-    {% endblock %}
+    <div class="fixed-top">
+      {% block navbars %}
+        {% include "partials/header.html" %}
+      {% endblock %}
+    </div>
 
     <main role="main" class="container">
       {% block body %}
@@ -27,7 +29,6 @@
 
 
     {% block footer %}
-       {% include "partials/footer.html" %}
     {% endblock %}
 
     <script>
