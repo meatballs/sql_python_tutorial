@@ -6,7 +6,7 @@
     <p>However, the content of the tutorial is written using interactive <a href="https://jupyter.org/">Jupyter Notebooks</a>. This means that all of the code can be run from within the tutorial itself. To do that, you need a server to host the notebooks so that you can see them in your web browser. There are two options:</p>
     <p><i>If you have never used a Jupyter notebook before, you may want to have a look at the <a href="https://jupyter-notebook.readthedocs.io/en/stable/notebook.html#notebook-user-interface">documentation</a>. Alternatively, Corey Shafer produced a very good <a href="https://www.youtube.com/watch?v=HW29067qVWk">video tutorial</a> where he installs a Jupyter server on his computer (option 2 below) and shows you how to use it. If you choose option 1 below, you can ignore where he installs and starts his server and concentrate on how to use the notebooks.</i></p>
 
-    <h2>1. Use an Online Service</h2>
+    <h2 id="howto-binder">1. Use an Online Service</h2>
     <p>This is the simplest option. There is nothing to install on your computer and everything is done within your web browser.</p>
     <p>If you choose this option, be aware that:</p>
     <ul>
@@ -16,7 +16,7 @@
     </ul>
     <p><a class="btn btn-primary btn-lg" href="https://mybinder.org/v2/gh/meatballs/sql_python_notebooks/master" role="button">Launch Notebook Server&nbsp;<i class="fa fa-play fa-fw" aria-hidden="true"></i></a></p>
 
-    <h2>2. Use Your Own Computer</h2>
+    <h2 id="howto-local">2. Use Your Own Computer</h2>
     <p>Using your own computer allows you to work offline and to keep any changes you make to the code or the sample database. It does, however, require you to install some software before you can start:</p>
 
     <h3>2.1. Recommended Method - Anaconda</h3>
@@ -54,6 +54,6 @@
     <h3 id="flight-data-file">2.4 Optional Bulk Data File</h3>
     <p><a href="/{{root}}/chapters/12/">Chapter 12 - Bulk Loading</a> uses a 70 MB file with over 200 000 records. If you intend to work through that chapter, you will need to <a href="http://www.owencampbell.me.uk/sql_python_tutorial/notebooks/flight-data.csv" download>download the file</a> to the same directory as the notebooks</p>
 
-    <h3>2.5 Optional Database Browser</h3>
+    <h3 id="howto-db-browser">2.5 Optional Database Browser</h3>
     <p>Although the tutorial focusses on using Python to control a database, it can sometimes be useful to use a command line or graphical tool. Some of the chapters include examples of using the open source <a href="http://sqlitebrowser.org/">DB Browser for SQLite</a> in addition to the Python examples.
 {% endblock %}
