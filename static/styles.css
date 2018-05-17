@@ -9,6 +9,10 @@ body {
   margin-bottom: 60px;
 }
 
+h1 {
+  padding-bottom: .5rem;
+}
+
 .jumbotron {
   border-radius: 1rem;
 }
