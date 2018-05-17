@@ -27,7 +27,11 @@
       {% endblock %}
     </main>
 
-    {% include "partials/footer.html" %}
+    {% block footer %}
+      <footer class="footer d-none d-md-block">
+        {% include "partials/footer.html" %}
+      </footer>
+    {% endblock %}
 
     <script>
       ((window.gitter = {}).chat = {}).options = {
