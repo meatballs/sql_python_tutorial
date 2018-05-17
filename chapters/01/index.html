@@ -62,7 +62,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Create-A-Database">Create A Database<a class="anchor-link" href="#Create-A-Database">&#182;</a></h1><p>For this tutorial, we'll use the <a href="http://www.sqlalchemy.org/">sqlalchemy</a> Python library to communicate with a database.</p>
+<h1 id="Create-A-Database">Create A Database<a class="anchor-link" href="#Create-A-Database">&#182;</a></h1><p>For this tutorial, we'll use the <a href="http://www.sqlalchemy.org/">SQLAlchemy</a> Python library to communicate with a database.</p>
 <p>Let's import it:</p>
 
 </div>
@@ -85,10 +85,10 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Sqlalchemy uses an "engine" object to interact with a database.</p>
+<p>SQLAlchemy uses an "engine" object to interact with a database.</p>
 <p>To create an engine, we first need to choose a Database Management System (DBMS). We'll use <a href="https://sqlite.org/index.html">SQLite</a> as our DBMS.</p>
-<p>Next, we have to define a connection URL. The URL tells sqlalchemy which DBMS we have chosen and how to connect to our database.</p>
-<p>SQLite uses a single file for each database and the structure of the URL we need for sqlalchemy is:</p>
+<p>Next, we have to define a connection URL. The URL tells SQLAlchemy which DBMS we have chosen and how to connect to our database.</p>
+<p>SQLite uses a single file for each database and the structure of the URL we need for SQLAlchemy is:</p>
 
 <pre><code>sqlite:///&lt;path to the database file&gt;</code></pre>
 <p>Our example database will contain data about High Altitude Balloon flights. Let's name our database file <code>flight.db</code> and create an engine object for it:</p>
@@ -114,7 +114,7 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can now connect to our database using the <code>connect()</code> method of our engine.</p>
-<p>Sqlalchemy will look for the file we specified in our URL and establish a connection to our database. If the file doesn't exist, sqlalchemy will create and then make the connection.</p>
+<p>SQLAlchemy will look for the file we specified in our URL and establish a connection to our database. If the file doesn't exist, sqlalchemy will create and then make the connection.</p>
 
 </div>
 </div>
