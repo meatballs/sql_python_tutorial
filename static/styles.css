@@ -32,12 +32,12 @@ h1 {
   z-index: 100;
 }
 
-.list-group {
+.chapter-list {
   white-space: nowrap;
   padding: 0 1rem;
 }
 
-.list-group-item {
+.chapter-list-item {
   vertical-align: middle;
   display: inline-block;
   padding: .5rem;
