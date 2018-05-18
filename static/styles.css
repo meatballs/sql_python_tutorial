@@ -33,13 +33,11 @@ h1 {
 }
 
 .list-group {
-  list-style: decimal inside;
   white-space: nowrap;
   padding: 0 1rem;
 }
 
 .list-group-item {
-  display: list-item;
   vertical-align: middle;
   display: inline-block;
   padding: .5rem;
