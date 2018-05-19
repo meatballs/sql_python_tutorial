@@ -2,7 +2,7 @@ import collections
 
 import click
 import jinja2
-import pathlib
+from pathlib import Path
 import tqdm
 from nbconvert import HTMLExporter
 
@@ -65,7 +65,7 @@ def make_dir(path, directory, root, previous_url=None, next_url=None):
     Create a directory for the name of the file
     """
     path_id = get_id(path)
-    p = pathlib.Path(directory, path_id)
+    p = Path(directory, path_id)
     p.mkdir(exist_ok=True)
     nb, _ = convert_html(path)
     nb = nb.replace("{{root}}", root)
@@ -93,7 +93,8 @@ def make_collection(paths, directory, root,
             next_path = paths[(index + 1) % number_of_paths]
             next_id = get_id(next_path)
 
-        make_dir(pathlib.Path(filename),
+        make_dir(
+            Path(filename),
             directory=directory,
             root=root,
             previous_url=previous_id,
@@ -109,7 +110,7 @@ def main(env):
 
     root = ENVIRONMENT_ROOTS[env]
 
-    nb_dir = pathlib.Path('notebooks')
+    nb_dir = Path('notebooks')
     chapter_paths = sorted(nb_dir.glob('./*ipynb'))
 
     for paths, directory in [(chapter_paths, "chapters")]:
@@ -120,14 +121,24 @@ def main(env):
         chapters.append(Chapter(f"{get_id(path)}",
                                 get_name(path), str(path)))
 
+
+    pages_template_dir = Path('templates', 'pages')
+    pages = pages_template_dir.glob('./*.html')
+    pages_output_dir = Path('pages')
+
     pages = [
         {'template': 'home.html', 'output': 'index.html'},
         {'template': 'intro.html', 'output': 'pages/intro.html'},
         {'template': 'howto.html', 'output': 'pages/howto.html'},
         {'template': 'primer.html', 'output': 'pages/primer.html'}]
     for page in pages:
-        html = render_template(f'pages/{page["template"]}', {'root': root})
-        with open(page['output'], 'w') as f:
+        if page.stem == 'home':
+            output_file = Path('index.html')
+        else:
+            output_file = Path(pages_output_dir, page)
+
+        html = render_template(Path(pages_template_dir, page), {'root': root})
+        with output_file.open('w') as f:
             f.write(html)
 
     html = render_template(
