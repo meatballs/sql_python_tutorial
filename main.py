@@ -126,11 +126,6 @@ def main(env):
     pages = pages_template_dir.glob('./*.html')
     pages_output_dir = Path('pages')
 
-    pages = [
-        {'template': 'home.html', 'output': 'index.html'},
-        {'template': 'intro.html', 'output': 'pages/intro.html'},
-        {'template': 'howto.html', 'output': 'pages/howto.html'},
-        {'template': 'primer.html', 'output': 'pages/primer.html'}]
     for page in pages:
         if page.stem == 'home':
             output_file = Path('index.html')
