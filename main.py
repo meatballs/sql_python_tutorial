@@ -121,7 +121,6 @@ def main(env):
         chapters.append(Chapter(f"{get_id(path)}",
                                 get_name(path), str(path)))
 
-
     pages_template_dir = Path('templates', 'pages')
     pages = pages_template_dir.glob('./*.html')
     pages_output_dir = Path('pages')
