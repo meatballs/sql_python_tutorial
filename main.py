@@ -131,7 +131,8 @@ def main(env):
         else:
             output_file = Path(pages_output_dir, page)
 
-        html = render_template(Path(pages_template_dir, page), {'root': root})
+        html = render_template(
+            str(Path(pages_template_dir, page)), {'root': root})
         with output_file.open('w') as f:
             f.write(html)
 
