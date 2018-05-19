@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1><i class="fa fa-cogs" aria-hidden="true"></i> How To Use This Tutorial</h1>
-    <p>If you prefer to read the tutorial in your web browser without executing any of the code, then head over to the <a href="/{{root}}/chapters/">contents</a> page and follow the links for each of the chapters.</p>
+    <p>If you prefer to read the tutorial in your web browser without executing any of the code, then head over to the <a href="{{root}}chapters/">contents</a> page and follow the links for each of the chapters.</p>
     <p>However, the content of the tutorial is written using interactive <a href="https://jupyter.org/">Jupyter Notebooks</a>. This means that all of the code can be run from within the tutorial itself. To do that, you need a server to host the notebooks so that you can see them in your web browser. There are two options:</p>
     <p><i>If you have never used a Jupyter notebook before, you may want to have a look at the <a href="https://jupyter-notebook.readthedocs.io/en/stable/notebook.html#notebook-user-interface">documentation</a>. Alternatively, Corey Shafer produced a very good <a href="https://www.youtube.com/watch?v=HW29067qVWk">video tutorial</a> where he installs a Jupyter server on his computer (option 2 below) and shows you how to use it. If you choose option 1 below, you can ignore where he installs and starts his server and concentrate on how to use the notebooks.</i></p>
 
@@ -12,7 +12,7 @@
     <ul>
       <li>The server will take a few moments to start, especially at times when the service is busy.</li>
       <li>Nothing is saved between sessions. If you close your web browser, any changes you have made to the code or the sample database will be lost.</li>
-      <li>The code typically takes longer to execute than it would on a local computer. In particular, it is best not to run the first example in <a href="/{{root}}/chapters/12/">Chapter 12 - Bulk Loading</a>.
+      <li>The code typically takes longer to execute than it would on a local computer. In particular, it is best not to run the first example in <a href="{{root}}chapters/12/">Chapter 12 - Bulk Loading</a>.
     </ul>
     <p><a class="btn btn-primary btn-lg" href="https://mybinder.org/v2/gh/meatballs/sql_python_notebooks/master" role="button">Launch Notebook Server&nbsp;<i class="fa fa-play fa-fw" aria-hidden="true"></i></a></p>
 
@@ -43,7 +43,7 @@
     </div>
 
     <h3>2.3. Running the Notebooks</h3>
-    <p>Each chapter listed on the <a href="/{{root}}/chapters/">Contents</a> page has a link which you can use to download the notebook file. Place these files in a directory of your choice and then, in your terminal, change to that directory and start the Jupyter server:</p>
+    <p>Each chapter listed on the <a href="{{root}}chapters/">Contents</a> page has a link which you can use to download the notebook file. Place these files in a directory of your choice and then, in your terminal, change to that directory and start the Jupyter server:</p>
     <div class="code-block">
       <pre><code>
         jupyter notebook
@@ -52,7 +52,7 @@
     <p>After a few moments, your browser will open a page which lists all the notebooks you downloaded.</p>
 
     <h3 id="flight-data-file">2.4 Optional Bulk Data File</h3>
-    <p><a href="/{{root}}/chapters/12/">Chapter 12 - Bulk Loading</a> uses a 70 MB file with over 200 000 records. If you intend to work through that chapter, you will need to <a href="http://www.owencampbell.me.uk/sql_python_tutorial/notebooks/flight-data.csv" download>download the file</a> to the same directory as the notebooks</p>
+    <p><a href="{{root}}chapters/12/">Chapter 12 - Bulk Loading</a> uses a 70 MB file with over 200 000 records. If you intend to work through that chapter, you will need to <a href="http://www.owencampbell.me.uk/sql_python_tutorial/notebooks/flight-data.csv" download>download the file</a> to the same directory as the notebooks</p>
 
     <h3 id="howto-db-browser">2.5 Optional Database Browser</h3>
     <p>Although the tutorial focuses on using Python to control a database, it can sometimes be useful to use a command line or graphical tool. Some of the chapters include examples of using the open source <a href="http://sqlitebrowser.org/">DB Browser for SQLite</a> in addition to the Python examples.

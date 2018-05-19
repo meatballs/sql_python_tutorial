@@ -1,16 +1,22 @@
+import collections
+
+import click
+import jinja2
 import pathlib
 import tqdm
-import collections
-import jinja2
-
 from nbconvert import HTMLExporter
 
-ROOT = 'sql_python_tutorial'
+
+ENVIRONMENT_ROOTS = {
+    'local': '/',
+    'gh_pages': '/sql_python_tutorial/'
+}
 
 
 def get_id(path):
-    """
-    Return the id of a file
+    """The numeric id of the file name as a string
+
+    e.g. The id of a file named '01-Test-File' would be '01'
     """
     stem = path.stem
     try:
@@ -23,8 +29,10 @@ def get_id(path):
 
 
 def get_name(path):
-    """
-    Return the name of a file
+    """The file name stripped of any numeric id
+
+
+    e.g. the name of a file '01-Test-File' would be 'Test-File'
     """
     stem = path.stem
     try:
@@ -52,24 +60,24 @@ def render_template(template_file, template_vars):
     return template.render(template_vars)
 
 
-def make_dir(path, directory, previous_url=None, next_url=None):
+def make_dir(path, directory, root, previous_url=None, next_url=None):
     """
     Create a directory for the name of the file
     """
     path_id = get_id(path)
-    p = pathlib.Path(f"./{directory}/{path_id}")
+    p = pathlib.Path(directory, path_id)
     p.mkdir(exist_ok=True)
     nb, _ = convert_html(path)
-    nb = nb.replace("{{root}}", ROOT)
+    nb = nb.replace("{{root}}", root)
     html = render_template("notebook.html", {"nb": nb,
-        "root": ROOT,
+        "root": root,
         "id": path_id,
         "previous_url": previous_url,
         "next_url": next_url})
     (p / 'index.html').write_text(html)
 
 
-def make_collection(paths, directory,
+def make_collection(paths, directory, root,
                     make_previous_url=True,
                     make_next_url=True):
 
@@ -77,29 +85,35 @@ def make_collection(paths, directory,
     for index, filename in enumerate(paths):
         previous_id = None
         if index > 0:
-          previous_path = paths[(index - 1) % number_of_paths]
-          previous_id = get_id(previous_path)
+            previous_path = paths[(index - 1) % number_of_paths]
+            previous_id = get_id(previous_path)
 
         next_id = None
         if index + 1 < number_of_paths:
-          next_path = paths[(index + 1) % number_of_paths]
-          next_id = get_id(next_path)
+            next_path = paths[(index + 1) % number_of_paths]
+            next_id = get_id(next_path)
 
-        make_dir(pathlib.Path(filename), directory=directory,
-                 previous_url=previous_id,
-                 next_url=next_id)
+        make_dir(pathlib.Path(filename),
+            directory=directory,
+            root=root,
+            previous_url=previous_id,
+            next_url=next_id)
 
 
 Chapter = collections.namedtuple("chapter", ["dir", "title", "nb"])
 
 
-if __name__ == "__main__":
+@click.command()
+@click.option('--env', default='local')
+def main(env):
+
+    root = ENVIRONMENT_ROOTS[env]
 
     nb_dir = pathlib.Path('notebooks')
     chapter_paths = sorted(nb_dir.glob('./*ipynb'))
 
     for paths, directory in [(chapter_paths, "chapters")]:
-        make_collection(paths=paths, directory=directory)
+        make_collection(paths=paths, directory=directory, root=root)
 
     chapters = []
     for path in tqdm.tqdm(sorted(chapter_paths)):
@@ -107,16 +121,20 @@ if __name__ == "__main__":
                                 get_name(path), str(path)))
 
     pages = [
-      {'template': 'home.html', 'output': 'index.html'},
-      {'template': 'intro.html', 'output': 'pages/intro.html'},
-      {'template': 'howto.html', 'output': 'pages/howto.html'},
-      {'template': 'primer.html', 'output': 'pages/primer.html'}]
+        {'template': 'home.html', 'output': 'index.html'},
+        {'template': 'intro.html', 'output': 'pages/intro.html'},
+        {'template': 'howto.html', 'output': 'pages/howto.html'},
+        {'template': 'primer.html', 'output': 'pages/primer.html'}]
     for page in pages:
-      html = render_template(f'pages/{page["template"]}', {'root': ROOT})
-      with open(page['output'], 'w') as f:
-          f.write(html)
+        html = render_template(f'pages/{page["template"]}', {'root': root})
+        with open(page['output'], 'w') as f:
+            f.write(html)
 
     html = render_template(
-      "chapters.html", {"chapters": chapters, "root": ROOT})
+        "chapters.html", {"chapters": chapters, "root": root})
     with open('./chapters/index.html', 'w') as f:
         f.write(html)
+
+
+if __name__ == '__main__':
+    main()
