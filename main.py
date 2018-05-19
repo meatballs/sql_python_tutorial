@@ -122,17 +122,16 @@ def main(env):
                                 get_name(path), str(path)))
 
     pages_template_dir = Path('templates', 'pages')
-    pages = pages_template_dir.glob('./*.html')
+    page_templates = pages_template_dir.glob('./*.html')
     pages_output_dir = Path('pages')
 
-    for page in pages:
-        if page.stem == 'home':
+    for template in page_templates:
+        if template.stem == 'home':
             output_file = Path('index.html')
         else:
-            output_file = Path(pages_output_dir, page)
+            output_file = Path(pages_output_dir, template.name)
 
-        html = render_template(
-            str(Path(pages_template_dir, page)), {'root': root})
+        html = render_template(str(template), {'root': root})
         with output_file.open('w') as f:
             f.write(html)
 
