@@ -12,6 +12,11 @@ ENVIRONMENT_ROOTS = {
     'gh_pages': '/sql_python_tutorial/'
 }
 
+BUILD_FOLDERS = {
+    'local': 'build',
+    'gh_pages': '.'
+}
+
 
 def get_id(path):
     """The numeric id of the file name as a string
@@ -109,6 +114,8 @@ Chapter = collections.namedtuple("chapter", ["dir", "title", "nb"])
 def main(env):
 
     root = ENVIRONMENT_ROOTS[env]
+    build_dir = Path(BUILD_FOLDERS[env])
+    build_dir.mkdir(exist_ok=True)
 
     nb_dir = Path('notebooks')
     chapter_paths = sorted(nb_dir.glob('./*ipynb'))
@@ -123,11 +130,12 @@ def main(env):
 
     pages_template_dir = Path('templates', 'pages')
     page_templates = pages_template_dir.glob('./*.html')
-    pages_output_dir = Path('pages')
+    pages_output_dir = Path(build_dir, 'pages')
+    pages_output_dir.mkdir(exist_ok=True)
 
     for template in page_templates:
         if template.stem == 'home':
-            output_file = Path('index.html')
+            output_file = Path(build_dir, 'index.html')
         else:
             output_file = Path(pages_output_dir, template.name)
 
@@ -136,9 +144,11 @@ def main(env):
         with output_file.open('w') as f:
             f.write(html)
 
+    chapters_output_dir = Path(build_dir, 'chapters')
+    chapters_output_dir.mkdir(exist_ok=True)
     html = render_template(
         "chapters.html", {"chapters": chapters, "root": root})
-    with open('./chapters/index.html', 'w') as f:
+    with Path(chapters_output_dir, 'index.html').open('w') as f:
         f.write(html)
 
 
