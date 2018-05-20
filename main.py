@@ -1,5 +1,6 @@
 import collections
 import logging
+import shutil
 
 import click
 import daiquiri
@@ -129,6 +130,7 @@ def main(env):
     nb_dir = Path('notebooks')
     chapter_paths = sorted(nb_dir.glob('./*ipynb'))
     chapters_output_dir = Path(build_dir, 'chapters')
+    shutil.rmtree(chapters_output_dir, ignore_errors=True)
     chapters_output_dir.mkdir(exist_ok=True)
 
     make_collection(
@@ -151,6 +153,7 @@ def main(env):
     pages_template_dir = Path('templates', 'pages')
     page_templates = pages_template_dir.glob('./*.html')
     pages_output_dir = Path(build_dir, 'pages')
+    shutil.rmtree(pages_output_dir, ignore_errors=True)
     pages_output_dir.mkdir(exist_ok=True)
 
     for template in page_templates:
@@ -164,6 +167,13 @@ def main(env):
         with output_file.open('w') as f:
             f.write(html)
     logger.info('Done')
+
+    if env == 'local':
+        logger.info(f'Copying static files to {build_dir}...')
+        static_output_dir = Path(build_dir, 'static')
+        shutil.rmtree(static_output_dir)
+        shutil.copytree('static', static_output_dir)
+        logger.info('Done')
 
     logger.info('Finished')
 
