@@ -77,12 +77,14 @@ def make_dir(path, directory, root, previous_url=None, next_url=None):
     p.mkdir(exist_ok=True)
     nb, _ = convert_html(path)
     nb = nb.replace("{{root}}", root)
-    html = render_template("notebook.html", {"nb": nb,
+    html = render_template("notebook.html", {
+        "nb": nb,
         "root": root,
         "id": path_id,
         "previous_url": previous_url,
         "next_url": next_url})
-    (p / 'index.html').write_text(html)
+    with Path(p, 'index.html').open('w') as f:
+        f.write(html)
 
 
 def make_collection(paths, directory, root,
