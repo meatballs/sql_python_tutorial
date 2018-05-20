@@ -129,6 +129,7 @@ def main(env):
     nb_dir = Path('notebooks')
     chapter_paths = sorted(nb_dir.glob('./*ipynb'))
     chapters_output_dir = Path(build_dir, 'chapters')
+    chapters_output_dir.mkdir(exist_ok=True)
 
     make_collection(
         paths=chapter_paths, directory=chapters_output_dir, root=root)
