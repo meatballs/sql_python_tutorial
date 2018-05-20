@@ -1,11 +1,14 @@
 import collections
+import logging
 
 import click
+import daiquiri
 import jinja2
-from pathlib import Path
-import tqdm
 from nbconvert import HTMLExporter
+from pathlib import Path
 
+daiquiri.setup(level=logging.INFO)
+logger = daiquiri.getLogger(__name__)
 
 ENVIRONMENT_ROOTS = {
     'local': '/',
@@ -112,22 +115,36 @@ Chapter = collections.namedtuple("chapter", ["dir", "title", "nb"])
 @click.command()
 @click.option('--env', default='local')
 def main(env):
+    logger.info(f'Building site for {env} environment')
 
     root = ENVIRONMENT_ROOTS[env]
     build_dir = Path(BUILD_FOLDERS[env])
     build_dir.mkdir(exist_ok=True)
 
+    logger.info(f'Output files will be in {build_dir}')
+
+    logger.info('Building Notebooks...')
     nb_dir = Path('notebooks')
     chapter_paths = sorted(nb_dir.glob('./*ipynb'))
+    chapters_output_dir = Path(build_dir, 'chapters')
 
-    for paths, directory in [(chapter_paths, "chapters")]:
-        make_collection(paths=paths, directory=directory, root=root)
+    make_collection(
+        paths=chapter_paths, directory=chapters_output_dir, root=root)
+    logger.info('Done')
 
+    logger.info('Building Chapters...')
     chapters = []
-    for path in tqdm.tqdm(sorted(chapter_paths)):
+    for path in sorted(chapter_paths):
         chapters.append(Chapter(f"{get_id(path)}",
                                 get_name(path), str(path)))
 
+    html = render_template(
+        "chapters.html", {"chapters": chapters, "root": root})
+    with Path(chapters_output_dir, 'index.html').open('w') as f:
+        f.write(html)
+    logger.info('Done')
+
+    logger.info('Building Pages...')
     pages_template_dir = Path('templates', 'pages')
     page_templates = pages_template_dir.glob('./*.html')
     pages_output_dir = Path(build_dir, 'pages')
@@ -143,14 +160,9 @@ def main(env):
             str(Path('pages', template.name)), {'root': root})
         with output_file.open('w') as f:
             f.write(html)
+    logger.info('Done')
 
-    chapters_output_dir = Path(build_dir, 'chapters')
-    chapters_output_dir.mkdir(exist_ok=True)
-    html = render_template(
-        "chapters.html", {"chapters": chapters, "root": root})
-    with Path(chapters_output_dir, 'index.html').open('w') as f:
-        f.write(html)
-
+    logger.info('Finished')
 
 if __name__ == '__main__':
     main()
