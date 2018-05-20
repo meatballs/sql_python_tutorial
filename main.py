@@ -116,7 +116,7 @@ Chapter = collections.namedtuple("chapter", ["dir", "title", "nb"])
 
 
 @click.command()
-@click.option('--env', default='local')
+@click.option('--env', type=click.Choice(BUILD_FOLDERS.keys()), default='local')
 def main(env):
     logger.info(f'Building site for {env} environment')
 
