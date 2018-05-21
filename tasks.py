@@ -28,6 +28,7 @@ def static_dir(env):
     else:
         return None
 
+
 def get_id(path):
     """The numeric id of the file name as a string
 
@@ -172,12 +173,12 @@ def build_pages(c):
 def copy_static_files(c):
     if c.static_dir is not None:
         logger.info(f'Copying static files to {c.static_dir}...')
-        shutil.rmtree(c.static_dir)
-        shutil.copytree('static', c.staticdir)
+        shutil.rmtree(c.static_dir, ignore_errors=True)
+        shutil.copytree('static', c.static_dir)
         logger.info('Done')
 
 
-def setup(c, env):
+def setup_context(c, env):
     c.env = env
     c.notebook_dir = Path('notebooks')
     c.chapter_paths = sorted(c.notebook_dir.glob('./*ipynb'))
@@ -191,5 +192,4 @@ def setup(c, env):
 @task(post=[
     build_notebooks, build_contents_page, build_pages, copy_static_files])
 def build(c, env='local'):
-    setup(c, env)
-
+    setup_context(c, env)
