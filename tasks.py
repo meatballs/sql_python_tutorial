@@ -217,6 +217,8 @@ def serve(c, env='local'):
 def update_notebooks(c):
     setup_base_context(c)
     with c.cd(str(c.notebook_dir)):
+        status = c.run('git status porcelain')
+        logger.info(status)
         c.run('git pull')
     c.run('git add -A')
     c.run('git commit -m "Update notebooks"')
