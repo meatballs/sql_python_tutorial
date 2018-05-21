@@ -142,8 +142,8 @@ def setup_env_context(c, env):
 @task
 def update_notebooks(c):
     with c.cd(str(c.notebook_dir)):
-        status = c.run('git diff-index --quiet HEAD')
-    if status.exited:
+        status = c.run('git status --porcelain')
+    if status.stdout:
         logger.info('Updating notebooks submodule...')
         with c.cd(str(c.notebook_dir)):
             c.run('git pull')
