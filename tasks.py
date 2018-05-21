@@ -240,5 +240,5 @@ def push_changes(c):
 @task(post=[
     update_notebooks, build_notebooks, build_contents_page, build_pages,
     copy_static_files, push_changes])
-def publish(c):
-    setup_env_context(c, 'gh_pages')
+def publish(c, env='gh_pages'):
+    setup_env_context(c, env)
