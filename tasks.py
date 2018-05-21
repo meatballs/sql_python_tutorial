@@ -226,8 +226,8 @@ def serve(c, env='local'):
 
 @task
 def push_changes(c):
-    status = c.run('git diff-index --quiet HEAD')
-    if status.exited:
+    status = c.run('git status --porcelain')
+    if status.stdout:
         logger.info('Site Rebuilt. Publishing changes...')
         c.run('git add -A')
         c.run('git commit -m "Rebuild site"')
