@@ -6,7 +6,7 @@ import os
 
 import daiquiri
 import jinja2
-from invoke import task
+from invoke import task, call
 from nbconvert import HTMLExporter
 from pathlib import Path
 
@@ -124,13 +124,26 @@ def make_collection(paths, directory, root,
 Chapter = collections.namedtuple("chapter", ["dir", "title", "nb"])
 
 
+def setup_base_context(c):
+    c.notebook_dir = Path('notebooks')
+    c.chapter_paths = sorted(c.notebook_dir.glob('./*ipynb'))
+    pages_template_dir = Path('templates', 'pages')
+    c.page_templates = list(pages_template_dir.glob('./*.html'))
+
+
+def setup_env_context(c, env):
+    setup_base_context(c)
+    c.env = env
+    c.chapters_output_dir = Path(BUILD_DIRS[c.env], 'chapters')
+    c.pages_output_dir = Path(BUILD_DIRS[c.env], 'pages')
+    c.static_dir = static_dir(env)
+
+
 @task
 def update_notebooks(c):
-    setup_base_context(c)
     with c.cd(str(c.notebook_dir)):
         status = c.run('git diff-index --quiet HEAD')
-        logger.info(status)
-    if status:
+    if status.exited:
         logger.info('Updating notebooks submodule...')
         with c.cd(str(c.notebook_dir)):
             c.run('git pull')
@@ -197,34 +210,28 @@ def copy_static_files(c):
         logger.info('Done')
 
 
-def setup_base_context(c):
-    c.notebook_dir = Path('notebooks')
-    c.chapter_paths = sorted(c.notebook_dir.glob('./*ipynb'))
-    pages_template_dir = Path('templates', 'pages')
-    c.page_templates = list(pages_template_dir.glob('./*.html'))
-
-
-def setup_env_context(c, env):
-    setup_base_context(c)
-    c.env = env
-    c.chapters_output_dir = Path(BUILD_DIRS[c.env], 'chapters')
-    c.pages_output_dir = Path(BUILD_DIRS[c.env], 'pages')
-    c.static_dir = static_dir(env)
-
-
 @task(post=[
-    build_notebooks, build_contents_page, build_pages, copy_static_files])
+    update_notebooks, build_notebooks, build_contents_page, build_pages,
+    copy_static_files])
 def build(c, env='local'):
     setup_env_context(c, env)
 
 
 @task
-def start_server(c):
+def serve(c, env='local'):
     handler_class = http.server.SimpleHTTPRequestHandler
-    os.chdir(BUILD_DIRS[c.env])
+    os.chdir(BUILD_DIRS[env])
     http.server.test(HandlerClass=handler_class, port=8000)
 
 
-@task(post=[start_server])
-def serve(c, env='local'):
-    setup_env_context(c, env)
+@task(pre=[call(build, 'gh_pages')])
+def publish(c):
+    status = c.run('git diff-index --quiet HEAD')
+    if status.exited:
+        logger.info('Site Rebuilt. Publishing changes...')
+        c.run('git add -A')
+        c.run('git commit -m "Rebuild site"')
+        c.run('git push')
+        logger.info('Done')
+    else:
+        logger.info('No changes to publish')
