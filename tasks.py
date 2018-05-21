@@ -125,6 +125,18 @@ Chapter = collections.namedtuple("chapter", ["dir", "title", "nb"])
 
 
 @task
+def update_notebooks(c):
+    setup_base_context(c)
+    with c.cd(str(c.notebook_dir)):
+        status = c.run('git diff-index --quiet HEAD')
+    if status:
+        with c.cd(str(c.notebook_dir)):
+            c.run('git pull')
+        c.run('git add -A')
+        c.run('git commit -m "Update notebooks"')
+
+
+@task
 def build_notebooks(c):
     logger.info('Building Notebooks...')
     shutil.rmtree(c.chapters_output_dir, ignore_errors=True)
@@ -211,15 +223,3 @@ def start_server(c):
 @task(post=[start_server])
 def serve(c, env='local'):
     setup_env_context(c, env)
-
-
-@task
-def update_notebooks(c):
-    setup_base_context(c)
-    with c.cd(str(c.notebook_dir)):
-        status = c.run('git status porcelain')
-        logger.info(status)
-        c.run('git pull')
-    c.run('git add -A')
-    c.run('git commit -m "Update notebooks"')
-    c.run('git push')
