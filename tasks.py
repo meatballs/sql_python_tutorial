@@ -130,10 +130,14 @@ def update_notebooks(c):
     with c.cd(str(c.notebook_dir)):
         status = c.run('git diff-index --quiet HEAD')
     if status:
+        logger.info('Updating notebooks submodule...')
         with c.cd(str(c.notebook_dir)):
             c.run('git pull')
         c.run('git add -A')
         c.run('git commit -m "Update notebooks"')
+        logger.info('Done')
+    else:
+        logger.info('Notebooks submodule up to date')
 
 
 @task
