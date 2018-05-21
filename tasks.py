@@ -224,8 +224,8 @@ def serve(c, env='local'):
     http.server.test(HandlerClass=handler_class, port=8000)
 
 
-@task(pre=[call(build, 'gh_pages')])
-def publish(c):
+@task
+def push_changes(c):
     status = c.run('git diff-index --quiet HEAD')
     if status.exited:
         logger.info('Site Rebuilt. Publishing changes...')
@@ -235,3 +235,10 @@ def publish(c):
         logger.info('Done')
     else:
         logger.info('No changes to publish')
+
+
+@task(post=[
+    update_notebooks, build_notebooks, build_contents_page, build_pages,
+    copy_static_files, push_changes])
+def publish(c):
+    setup_env_context(c, 'gh_pages')
