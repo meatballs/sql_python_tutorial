@@ -129,6 +129,7 @@ def update_notebooks(c):
     setup_base_context(c)
     with c.cd(str(c.notebook_dir)):
         status = c.run('git diff-index --quiet HEAD')
+        logger.info(status)
     if status:
         logger.info('Updating notebooks submodule...')
         with c.cd(str(c.notebook_dir)):
