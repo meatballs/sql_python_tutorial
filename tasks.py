@@ -1,10 +1,12 @@
 import collections
 import logging
 import shutil
+import http.server
+import os
 
 import daiquiri
 import jinja2
-from invoke import task, Collection
+from invoke import task
 from nbconvert import HTMLExporter
 from pathlib import Path
 
@@ -178,13 +180,17 @@ def copy_static_files(c):
         logger.info('Done')
 
 
-def setup_context(c, env):
-    c.env = env
+def setup_base_context(c):
     c.notebook_dir = Path('notebooks')
     c.chapter_paths = sorted(c.notebook_dir.glob('./*ipynb'))
-    c.chapters_output_dir = Path(BUILD_DIRS[c.env], 'chapters')
     pages_template_dir = Path('templates', 'pages')
     c.page_templates = list(pages_template_dir.glob('./*.html'))
+
+
+def setup_env_context(c, env):
+    setup_base_context(c)
+    c.env = env
+    c.chapters_output_dir = Path(BUILD_DIRS[c.env], 'chapters')
     c.pages_output_dir = Path(BUILD_DIRS[c.env], 'pages')
     c.static_dir = static_dir(env)
 
@@ -192,4 +198,26 @@ def setup_context(c, env):
 @task(post=[
     build_notebooks, build_contents_page, build_pages, copy_static_files])
 def build(c, env='local'):
-    setup_context(c, env)
+    setup_env_context(c, env)
+
+
+@task
+def start_server(c):
+    handler_class = http.server.SimpleHTTPRequestHandler
+    os.chdir(BUILD_DIRS[c.env])
+    http.server.test(HandlerClass=handler_class, port=8000)
+
+
+@task(post=[start_server])
+def serve(c, env='local'):
+    setup_env_context(c, env)
+
+
+@task
+def update_notebooks(c):
+    setup_base_context(c)
+    with c.cd('notebooks'):
+        c.run('git pull')
+    c.run('git add -A')
+    c.run('git commit -m "Update notebooks"')
+    c.run('git push')
