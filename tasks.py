@@ -216,7 +216,7 @@ def serve(c, env='local'):
 @task
 def update_notebooks(c):
     setup_base_context(c)
-    with c.cd('notebooks'):
+    with c.cd(str(c.notebook_dir)):
         c.run('git pull')
     c.run('git add -A')
     c.run('git commit -m "Update notebooks"')
