@@ -63,8 +63,7 @@
     <div class="row">
       <div class="col-sm-12">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Change-The-Data">Change The Data<a class="anchor-link" href="#Change-The-Data">&#182;</a></h1><p>To change records in a table, we use an 'UPDATE' statement.</p>
 <p>First, let's connect to our database and remind ourselves what records we have created so far:</p>
@@ -85,7 +84,7 @@
 <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;readings&#39;</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -95,7 +94,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[1]:</div>
+    <div class="prompt output_prompt">Out[1]:</div>
 
 
 
@@ -174,8 +173,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In an UPDATE statement, we define the table containing the records we want to change, the columns we want to change and the new values for those columns:</p>
 <div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">readings</span>
@@ -206,7 +204,7 @@
 <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;readings&#39;</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -216,7 +214,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[2]:</div>
+    <div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -295,8 +293,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can see that the third record now has the updated pressure and humidity values and the first two records are unchanged.</p>
 <p>We've seen previously that the check constraints on our table ensure that any record we try to insert must be valid. What happens if we attempt to update an existing record with invalid values?</p>
@@ -321,7 +318,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -331,7 +328,7 @@
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -345,8 +342,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Once again, SQLAlchemy raises an IntegrityError, our update fails and the check constraint has stopped us creating invalid records.</p>
 

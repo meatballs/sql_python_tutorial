@@ -63,8 +63,7 @@
     <div class="row">
       <div class="col-sm-12">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Dynamic-SQL">Dynamic SQL<a class="anchor-link" href="#Dynamic-SQL">&#182;</a></h1><p>So far, the values we have used our INSERT and UPDATE statements have been contained within the SQL statements themselves.</p>
 <p>Now let's see how we can safely pass values in from our Python code.</p>
@@ -85,7 +84,7 @@
 <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM readings&quot;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -95,7 +94,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[15]:</div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
 
@@ -111,8 +110,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We'll re-create the readings from chapter 3.</p>
 <p>Let's use a list of named tuples to hold that data:</p>
@@ -136,14 +134,13 @@
 <span class="p">]</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We'll now define our SQL statement using 'bound parameters.' These are a standard feature of SQL and will work across most DBMSs.</p>
 <p>Each '?' below is a placeholder which will take a value from our Python code at execution time.</p>
@@ -164,14 +161,13 @@
 <span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can now loop over our readings list and execute our SQL statement once for each entry.</p>
 
@@ -189,7 +185,7 @@
 <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;readings&#39;</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -199,7 +195,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[18]:</div>
+    <div class="prompt output_prompt">Out[18]:</div>
 
 
 
@@ -278,8 +274,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>NOTE:</strong> Using bound parameters is the only safe way to pass values from Python into SQL. Do not be tempted to build the SQL statement using string manipulation as this is a well known security vulnerability.</p>
 

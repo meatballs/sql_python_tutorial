@@ -59,8 +59,7 @@
     <div class="row">
       <div class="col-sm-12">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Bulk-Loading">Bulk Loading<a class="anchor-link" href="#Bulk-Loading">&#182;</a></h1><p>Previously, we inserted sixty records into the readings table but often we have much bigger sets of data.</p>
 <p>The <a href="http://www.owencampbell.me.uk/sql_python_tutorial/pages/howto#flight-data-file">flight-data.csv</a> file contains data for over 200 000 readings. Let's learn how to load that into our database.</p>
@@ -81,7 +80,7 @@
 <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;PRAGMA foreign_keys=on&quot;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -91,7 +90,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[2]:</div>
+    <div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -107,8 +106,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And then we load the contents of the file into a pandas dataframe.</p>
 <p>The file contains more columns than we are using, so we'll specify which ones we want to import:</p>
@@ -127,7 +125,7 @@
 <span class="n">flight_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -137,7 +135,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[3]:</div>
+    <div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -232,8 +230,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Two of the column names don't quite match what we've used in our table.</p>
 <p>Let's fix that:</p>
@@ -250,7 +247,7 @@
 <span class="n">flight_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -260,7 +257,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[4]:</div>
+    <div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -355,8 +352,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>There are some errors in the humidity readings due to sensor glitches. (e.g. You can see some negative figures in the first few rows).</p>
 <p>Let's set those to 0 or 100 if they are out of range:</p>
@@ -373,7 +369,7 @@
 <span class="n">flight_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -383,7 +379,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[5]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -478,8 +474,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally, there is no flight name.</p>
 <p>Let's make all these for flight hab1:</p>
@@ -496,7 +491,7 @@
 <span class="n">flight_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -506,7 +501,7 @@
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+    <div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -607,8 +602,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now, we are ready to insert our data into our readings table. Let's try using the same technique as when we loaded the sixty records in Chapter 3.</p>
 <p>We defined an INSERT statement using bound parameters and then looped over our dataset and executed that statement once for each record.</p>
@@ -640,10 +634,10 @@
         <span class="p">))</span>
 
 <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM readings&quot;</span><span class="p">)</span>     
-<span class="o">%</span><span class="k">timeit</span> -n1 -r1 load_data(connection, flight_data)
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">load_data</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">flight_data</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -653,7 +647,7 @@
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -667,8 +661,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To understand why this technique takes so long to run, we need to understand database transactions.</p>
 <p>When you ask a DBMS to make a change to a table using an INSERT, UPDATE or DELETE statement, it will guarantee:</p>
@@ -702,10 +695,10 @@
             <span class="p">))</span>
             
 <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM readings&quot;</span><span class="p">)</span>
-<span class="o">%</span><span class="k">timeit</span> -n1 -r1 load_data(connection, flight_data)
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">load_data</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">flight_data</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -715,7 +708,7 @@
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -729,8 +722,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You should see a huge drop in the amount of time it takes to execute this second example.</p>
 <p><strong>NOTE</strong> <em>The DELETE statement in the previous example is outside the transacation so that we have a fair time comparison with the first example. However, this means that, if any problem occurs with the inserts, the table will be left empty because the delete will already have succeeded. In the real world, it's likely that you would want the delete to be included in the same transaction as the inserts.</em></p>
@@ -755,10 +747,10 @@
         <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         
 <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM readings&quot;</span><span class="p">)</span>     
-<span class="o">%</span><span class="k">timeit</span> -n1 -r1 load_data(connection, flight_data)
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">load_data</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">flight_data</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -768,7 +760,7 @@
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -782,8 +774,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>On my laptop, that's now 100x faster than our first example and 4x faster than the second.</p>
 <p>Finally, although this tutorial focuses on learning SQL, it is worth noting that a pandas dataframe can be loaded directly into a database table using the <code>to_sql</code> method.</p>
@@ -798,10 +789,10 @@
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM readings&quot;</span><span class="p">)</span>
-<span class="o">%</span><span class="k">timeit</span> -n1 -r1 flight_data.to_sql(&#39;readings&#39;, connection, if_exists=&#39;append&#39;, index=False)
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">flight_data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;readings&#39;</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;append&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -811,7 +802,7 @@
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -825,8 +816,7 @@
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>By default, <code>to_sql</code> will place all the insert statements into a single transaction so this is far more efficient than our first example.</p>
 <p>Pandas will also iterate over our dataframe more efficiently than the for loop in our second example.</p>
