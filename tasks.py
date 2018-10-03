@@ -1,32 +1,27 @@
 import collections
-import logging
-import shutil
 import http.server
+import logging
 import os
+import shutil
+from pathlib import Path
+
+import jinja2
+from nbconvert import HTMLExporter
 
 import daiquiri
-import jinja2
-from invoke import task, call
-from nbconvert import HTMLExporter
-from pathlib import Path
+from invoke import call, task
 
 daiquiri.setup(level=logging.INFO)
 logger = daiquiri.getLogger(__name__)
 
-ROOTS = {
-    'local': '/',
-    'gh_pages': '/sql_python_tutorial/'
-}
+ROOTS = {"local": "/", "gh_pages": "/sql_python_tutorial/"}
 
-BUILD_DIRS = {
-    'local': 'build',
-    'gh_pages': '.'
-}
+BUILD_DIRS = {"local": "build", "gh_pages": "."}
 
 
 def static_dir(env):
-    if env == 'local':
-        return Path(BUILD_DIRS[env], 'static')
+    if env == "local":
+        return Path(BUILD_DIRS[env], "static")
     else:
         return None
 
@@ -38,7 +33,7 @@ def get_id(path):
     """
     stem = path.stem
     try:
-        return stem[:stem.index('-')]
+        return stem[: stem.index("-")]
     except ValueError:
         stem = stem.lower()
         stem = stem.replace(" ", "-")
@@ -54,7 +49,7 @@ def get_name(path):
     """
     stem = path.stem
     try:
-        return stem[stem.index('-'):].replace('-', ' ')
+        return stem[stem.index("-") :].replace("-", " ")
     except ValueError:
         return stem
 
@@ -87,19 +82,23 @@ def make_dir(path, directory, root, previous_url=None, next_url=None):
     p.mkdir(exist_ok=True)
     nb, _ = convert_html(path)
     nb = nb.replace("{{root}}", root)
-    html = render_template("notebook.html", {
-        "nb": nb,
-        "root": root,
-        "id": path_id,
-        "previous_url": previous_url,
-        "next_url": next_url})
-    with Path(p, 'index.html').open('w') as f:
+    html = render_template(
+        "notebook.html",
+        {
+            "nb": nb,
+            "root": root,
+            "id": path_id,
+            "previous_url": previous_url,
+            "next_url": next_url,
+        },
+    )
+    with Path(p, "index.html").open("w") as f:
         f.write(html)
 
 
-def make_collection(paths, directory, root,
-                    make_previous_url=True,
-                    make_next_url=True):
+def make_collection(
+    paths, directory, root, make_previous_url=True, make_next_url=True
+):
 
     number_of_paths = len(paths)
     for index, filename in enumerate(paths):
@@ -118,107 +117,127 @@ def make_collection(paths, directory, root,
             directory=directory,
             root=root,
             previous_url=previous_id,
-            next_url=next_id)
+            next_url=next_id,
+        )
 
 
 Chapter = collections.namedtuple("chapter", ["dir", "title", "nb"])
 
 
 def setup_base_context(c):
-    c.notebook_dir = Path('notebooks')
-    c.chapter_paths = sorted(c.notebook_dir.glob('./*ipynb'))
-    pages_template_dir = Path('templates', 'pages')
-    c.page_templates = list(pages_template_dir.glob('./*.html'))
+    c.notebook_dir = Path("notebooks")
+    c.chapter_paths = sorted(c.notebook_dir.glob("./*ipynb"))
+    pages_template_dir = Path("templates", "pages")
+    c.page_templates = list(pages_template_dir.glob("./*.html"))
 
 
 def setup_env_context(c, env):
     setup_base_context(c)
     c.env = env
-    c.chapters_output_dir = Path(BUILD_DIRS[c.env], 'chapters')
-    c.pages_output_dir = Path(BUILD_DIRS[c.env], 'pages')
+    c.chapters_output_dir = Path(BUILD_DIRS[c.env], "chapters")
+    c.pages_output_dir = Path(BUILD_DIRS[c.env], "pages")
     c.static_dir = static_dir(env)
 
 
 @task
 def update_notebooks(c):
     with c.cd(str(c.notebook_dir)):
-        status = c.run('git status --porcelain')
+        status = c.run("git status --porcelain")
     if status.stdout:
-        logger.info('Updating notebooks submodule...')
+        logger.info("Updating notebooks submodule...")
         with c.cd(str(c.notebook_dir)):
-            c.run('git pull')
-        c.run('git add -A')
+            c.run("git pull")
+        c.run("git add -A")
         c.run('git commit -m "Update notebooks"')
-        logger.info('Done')
+        logger.info("Done")
     else:
-        logger.info('Notebooks submodule up to date')
+        logger.info("Notebooks submodule up to date")
 
 
 @task
 def build_notebooks(c):
-    logger.info('Building Notebooks...')
+    logger.info("Building Notebooks...")
     shutil.rmtree(c.chapters_output_dir, ignore_errors=True)
     c.chapters_output_dir.mkdir(exist_ok=True)
 
     make_collection(
-        paths=c.chapter_paths, directory=c.chapters_output_dir,
-        root=ROOTS[c.env])
-    logger.info('Done')
+        paths=c.chapter_paths,
+        directory=c.chapters_output_dir,
+        root=ROOTS[c.env],
+    )
+    logger.info("Done")
 
 
 @task
 def build_contents_page(c):
-    logger.info('Building Contents...')
+    logger.info("Building Contents...")
     chapters = []
     for path in sorted(c.chapter_paths):
-        chapters.append(Chapter(f"{get_id(path)}",
-                                get_name(path), str(path)))
+        chapters.append(Chapter(f"{get_id(path)}", get_name(path), str(path)))
 
     html = render_template(
-        'chapters.html', {'chapters': chapters, "root": ROOTS[c.env]})
-    with Path(c.chapters_output_dir, 'index.html').open('w') as f:
+        "chapters.html", {"chapters": chapters, "root": ROOTS[c.env]}
+    )
+    with Path(c.chapters_output_dir, "index.html").open("w") as f:
         f.write(html)
-    logger.info('Done')
+    logger.info("Done")
 
 
 @task
 def build_pages(c):
-    logger.info('Building Pages...')
+    logger.info("Building Pages...")
 
     shutil.rmtree(c.pages_output_dir, ignore_errors=True)
     c.pages_output_dir.mkdir(exist_ok=True)
 
     for template in c.page_templates:
-        if template.stem == 'home':
-            output_file = Path(BUILD_DIRS[c.env], 'index.html')
+        if template.stem == "home":
+            output_file = Path(BUILD_DIRS[c.env], "index.html")
         else:
             output_file = Path(c.pages_output_dir, template.name)
 
         html = render_template(
-            str(Path('pages', template.name)), {'root': ROOTS[c.env]})
-        with output_file.open('w') as f:
+            str(Path("pages", template.name)), {"root": ROOTS[c.env]}
+        )
+        with output_file.open("w") as f:
             f.write(html)
-    logger.info('Done')
+    logger.info("Done")
 
 
 @task
 def copy_static_files(c):
     if c.static_dir is not None:
-        logger.info(f'Copying static files to {c.static_dir}...')
+        logger.info(f"Copying static files to {c.static_dir}...")
         shutil.rmtree(c.static_dir, ignore_errors=True)
-        shutil.copytree('static', c.static_dir)
-        logger.info('Done')
+        shutil.copytree("static", c.static_dir)
+        logger.info("Done")
 
 
-@task(post=[
-    update_notebooks, build_notebooks, build_contents_page, build_pages,
-    copy_static_files])
-def build(c, env='local'):
+@task
+def copy_notebook_files(c):
+    logger.info("Copying notebook files to output...")
+    output_dir = Path(c.chapters_output_dir, "notebooks")
+    output_dir.mkdir()
+    for file in c.notebook_dir.glob("*.ipynb"):
+        shutil.copy(str(file), str(output_dir))
+
+
+@task(
+    post=[
+        update_notebooks,
+        build_notebooks,
+        build_contents_page,
+        build_pages,
+        copy_static_files,
+        copy_notebook_files,
+    ]
+)
+def build(c, env="local"):
     setup_env_context(c, env)
 
 
 @task
-def serve(c, env='local'):
+def serve(c, env="local"):
     handler_class = http.server.SimpleHTTPRequestHandler
     os.chdir(BUILD_DIRS[env])
     http.server.test(HandlerClass=handler_class, port=8000)
@@ -226,19 +245,26 @@ def serve(c, env='local'):
 
 @task
 def push_changes(c):
-    status = c.run('git status --porcelain')
+    status = c.run("git status --porcelain")
     if status.stdout:
-        logger.info('Site Rebuilt. Publishing changes...')
-        c.run('git add -A')
+        logger.info("Site Rebuilt. Publishing changes...")
+        c.run("git add -A")
         c.run('git commit -m "Rebuild site"')
-        c.run('git push')
-        logger.info('Done')
+        c.run("git push")
+        logger.info("Done")
     else:
-        logger.info('No changes to publish')
+        logger.info("No changes to publish")
 
 
-@task(post=[
-    update_notebooks, build_notebooks, build_contents_page, build_pages,
-    copy_static_files, push_changes])
-def publish(c, env='gh_pages'):
+@task(
+    post=[
+        update_notebooks,
+        build_notebooks,
+        build_contents_page,
+        build_pages,
+        copy_static_files,
+        push_changes,
+    ]
+)
+def publish(c, env="gh_pages"):
     setup_env_context(c, env)
