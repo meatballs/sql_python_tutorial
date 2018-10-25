@@ -263,6 +263,7 @@ def push_changes(c):
         build_contents_page,
         build_pages,
         copy_static_files,
+        copy_notebook_files,
         push_changes,
     ]
 )
