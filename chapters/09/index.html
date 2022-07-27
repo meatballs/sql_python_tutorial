@@ -184,15 +184,15 @@
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">randint</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">randint</span>
 
 <span class="n">Reading</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Reading&#39;</span><span class="p">,</span> <span class="s1">&#39;flight, ts, temp, pressure, humidity&#39;</span><span class="p">)</span>
 
 <span class="n">readings</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">Reading</span><span class="p">(</span>
         <span class="n">flight</span><span class="o">=</span><span class="n">flight</span><span class="p">,</span>
-        <span class="n">ts</span><span class="o">=</span><span class="n">f</span><span class="s1">&#39;2015-01-01 09:{str(i+1).zfill(2)}:00&#39;</span><span class="p">,</span>
+        <span class="n">ts</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;2015-01-01 09:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">:00&#39;</span><span class="p">,</span>
         <span class="n">temp</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">uniform</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span>
         <span class="n">pressure</span><span class="o">=</span><span class="n">randint</span><span class="p">(</span><span class="mi">1020</span><span class="p">,</span> <span class="mi">1025</span><span class="p">),</span>
         <span class="n">humidity</span><span class="o">=</span><span class="n">randint</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
@@ -222,9 +222,9 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's extract and display the readings for flight hab2.</p>
 <p>We've seen previously that we can pass a table name to <code>read_sql</code>. Now, we'll see that we can also pass a SELECT statement:</p>
-<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">flight</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">humidity</span>
-<span class="k">FROM</span> <span class="n">readings</span>
-<span class="k">WHERE</span> <span class="n">flight</span> <span class="o">=</span> <span class="s1">&#39;hab2&#39;</span>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">flight</span><span class="p">,</span><span class="w"> </span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">pressure</span><span class="p">,</span><span class="w"> </span><span class="n">humidity</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">readings</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;hab2&#39;</span><span class="w"></span>
 </pre></div>
 <p>The SELECT clause defines the columns we want to see.</p>
 <p>The FROM clause defines the table(s) we want to query.</p>
@@ -591,29 +591,29 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>But what if we wanted to see the first few readings for any flights that took place in the UK?</p>
 <p>We'll use a JOIN clause to join the readings and flights tables together</p>
-<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">readings</span><span class="p">.</span><span class="o">*</span>
-<span class="k">FROM</span> <span class="n">readings</span> <span class="k">JOIN</span> <span class="n">flights</span>
-    <span class="k">ON</span> <span class="n">readings</span><span class="p">.</span><span class="n">flight</span> <span class="o">=</span> <span class="n">flights</span><span class="p">.</span><span class="n">name</span>
-<span class="k">WHERE</span> 
-    <span class="n">flights</span><span class="p">.</span><span class="n">country_code</span> <span class="o">=</span> <span class="s1">&#39;GB&#39;</span>
-    <span class="k">AND</span> <span class="n">readings</span><span class="p">.</span><span class="n">ts</span> <span class="o">&lt;</span> <span class="s1">&#39;2015-01-01 09:05:00&#39;</span>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">readings</span><span class="p">.</span><span class="o">*</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">readings</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">flights</span><span class="w"></span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">readings</span><span class="p">.</span><span class="n">flight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flights</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span>
+<span class="w">    </span><span class="n">flights</span><span class="p">.</span><span class="n">country_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;GB&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">readings</span><span class="p">.</span><span class="n">ts</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="s1">&#39;2015-01-01 09:05:00&#39;</span><span class="w"></span>
 </pre></div>
 <p>Here, we're telling the database engine that, for any record in the readings table, it can use the value in the 'flight' column to find a record in the flights table by matching on the 'name' column.</p>
 <p>It's common in SQL to use aliases for table names in queries using joins:</p>
-<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">r</span><span class="p">.</span><span class="o">*</span>
-<span class="k">FROM</span> <span class="n">readings</span> <span class="k">AS</span> <span class="n">r</span> <span class="k">JOIN</span> <span class="n">flights</span>  <span class="k">AS</span> <span class="n">f</span>
-    <span class="k">ON</span> <span class="n">r</span><span class="p">.</span><span class="n">flight</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">name</span>
-<span class="k">WHERE</span> 
-    <span class="n">f</span><span class="p">.</span><span class="n">country_code</span> <span class="o">=</span> <span class="s1">&#39;GB&#39;</span>
-    <span class="k">AND</span> <span class="n">r</span><span class="p">.</span><span class="n">ts</span> <span class="o">&lt;</span> <span class="s1">&#39;2015-01-01 09:05:00&#39;</span>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="o">*</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">readings</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">flights</span><span class="w">  </span><span class="k">AS</span><span class="w"> </span><span class="n">f</span><span class="w"></span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">flight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span>
+<span class="w">    </span><span class="n">f</span><span class="p">.</span><span class="n">country_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;GB&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">ts</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="s1">&#39;2015-01-01 09:05:00&#39;</span><span class="w"></span>
 </pre></div>
 <p>We can also include fields from both tables in the select clause:</p>
-<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">r</span><span class="p">.</span><span class="n">flight</span><span class="p">,</span> <span class="n">r</span><span class="p">.</span><span class="n">ts</span><span class="p">,</span> <span class="n">r</span><span class="p">.</span><span class="n">temp</span><span class="p">,</span> <span class="n">r</span><span class="p">.</span><span class="n">pressure</span><span class="p">,</span> <span class="n">f</span><span class="p">.</span><span class="n">longitude</span><span class="p">,</span> <span class="n">f</span><span class="p">.</span><span class="n">latitude</span>
-<span class="k">FROM</span> <span class="n">readings</span> <span class="k">AS</span> <span class="n">r</span> <span class="k">JOIN</span> <span class="n">flights</span>  <span class="k">AS</span> <span class="n">f</span>
-    <span class="k">ON</span> <span class="n">r</span><span class="p">.</span><span class="n">flight</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">name</span>
-<span class="k">WHERE</span> 
-    <span class="n">f</span><span class="p">.</span><span class="n">country_code</span> <span class="o">=</span> <span class="s1">&#39;GB&#39;</span>
-    <span class="k">AND</span> <span class="n">r</span><span class="p">.</span><span class="n">ts</span> <span class="o">&lt;</span> <span class="s1">&#39;2015-01-01 09:05:00&#39;</span>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">flight</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">pressure</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">latitude</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">readings</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">flights</span><span class="w">  </span><span class="k">AS</span><span class="w"> </span><span class="n">f</span><span class="w"></span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">flight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span>
+<span class="w">    </span><span class="n">f</span><span class="p">.</span><span class="n">country_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;GB&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">ts</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="s1">&#39;2015-01-01 09:05:00&#39;</span><span class="w"></span>
 </pre></div>
 <p>Let's try running that last example:</p>
 
@@ -787,18 +787,6 @@
   </footer>
   
 
-  <script>
-    ((window.gitter = {}).chat = {}).options = {
-      room: 'sql_python_tutorial/Lobby'
-    };
-  </script>
-  <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
 </body>
 
 </html>

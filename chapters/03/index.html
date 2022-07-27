@@ -93,8 +93,8 @@
 <p>To add data, we use an 'INSERT' statment.</p>
 <p>We specify the columns for which we have data and then the values for the record we want to create.</p>
 <p>In our case, we'll provide values for the flight name, timestamp and the teperature, pressure and humidity readings but we'll leave the accelerometer columns to have the default value of 0:</p>
-<div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">readings</span><span class="p">(</span><span class="n">flight</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">humidity</span><span class="p">)</span>
-<span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span> <span class="s1">&#39;2015-01-01 09:00:00&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1020</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">readings</span><span class="p">(</span><span class="n">flight</span><span class="p">,</span><span class="w"> </span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">pressure</span><span class="p">,</span><span class="w"> </span><span class="n">humidity</span><span class="p">)</span><span class="w"></span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2015-01-01 09:00:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1020</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 <p>Let's execute that statement:</p>
 
@@ -142,10 +142,10 @@
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>A single INSERT statement can create multiple records:</p>
-<div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">readings</span><span class="p">(</span><span class="n">flight</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">humidity</span><span class="p">)</span>
-<span class="k">VALUES</span>
-  <span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span> <span class="s1">&#39;2015-01-01 09:01:00&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1019</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span>
-  <span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span> <span class="s1">&#39;2015-01-01 09:02:00&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1019</span><span class="p">,</span> <span class="mi">41</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">readings</span><span class="p">(</span><span class="n">flight</span><span class="p">,</span><span class="w"> </span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">pressure</span><span class="p">,</span><span class="w"> </span><span class="n">humidity</span><span class="p">)</span><span class="w"></span>
+<span class="k">VALUES</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2015-01-01 09:01:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1019</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2015-01-01 09:02:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1019</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 <p>Let's execute this statment too so that our table has three records in total:</p>
 
@@ -274,18 +274,6 @@
   </footer>
   
 
-  <script>
-    ((window.gitter = {}).chat = {}).options = {
-      room: 'sql_python_tutorial/Lobby'
-    };
-  </script>
-  <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
 </body>
 
 </html>

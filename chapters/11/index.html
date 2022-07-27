@@ -69,13 +69,13 @@
 <h1 id="Create-A-View">Create A View<a class="anchor-link" href="#Create-A-View">&#182;</a></h1><p>We can store a query in the database as a view.</p>
 <p>Let's imagine that we often need the record set that gives maximum and minimum pressure by country.</p>
 <p>Here's the SQL from the previous chapter that generated it:</p>
-<div class="highlight"><pre><span></span><span class="k">SELECT</span>
-    <span class="n">f</span><span class="p">.</span><span class="n">country_code</span><span class="p">,</span>
-    <span class="k">MAX</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">temp</span><span class="p">)</span> <span class="k">AS</span> <span class="n">max_temp</span><span class="p">,</span>
-    <span class="k">MIN</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">temp</span><span class="p">)</span> <span class="k">AS</span> <span class="n">min_temp</span>
-<span class="k">FROM</span> <span class="n">readings</span> <span class="k">AS</span> <span class="n">r</span> <span class="k">JOIN</span> <span class="n">flights</span> <span class="k">AS</span> <span class="n">f</span>
-    <span class="k">ON</span> <span class="n">r</span><span class="p">.</span><span class="n">flight</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">name</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">f</span><span class="p">.</span><span class="n">country_code</span>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">f</span><span class="p">.</span><span class="n">country_code</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">MAX</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">temp</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">max_temp</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">MIN</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">temp</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">min_temp</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">readings</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">flights</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">f</span><span class="w"></span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">flight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">country_code</span><span class="w"></span>
 </pre></div>
 <p>Let's use this to create view. First we connect to our database:</p>
 
@@ -273,18 +273,6 @@
   </footer>
   
 
-  <script>
-    ((window.gitter = {}).chat = {}).options = {
-      room: 'sql_python_tutorial/Lobby'
-    };
-  </script>
-  <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
 </body>
 
 </html>

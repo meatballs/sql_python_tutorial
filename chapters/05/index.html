@@ -177,14 +177,14 @@
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In an UPDATE statement, we define the table containing the records we want to change, the columns we want to change and the new values for those columns:</p>
-<div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">readings</span>
-<span class="k">SET</span> <span class="n">pressure</span> <span class="o">=</span> <span class="mi">1021</span><span class="p">,</span> <span class="n">humidity</span> <span class="o">=</span> <span class="mi">42</span>
+<div class="highlight"><pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">readings</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">pressure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1021</span><span class="p">,</span><span class="w"> </span><span class="n">humidity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="w"></span>
 </pre></div>
 <p>If we were to run this statement, it would update all the records in our table.</p>
 <p>Let's imagine we only wanted to change one of them. To do that, we need to include a 'WHERE' clause:</p>
-<div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">readings</span>
-<span class="k">SET</span> <span class="n">pressure</span> <span class="o">=</span> <span class="mi">1021</span><span class="p">,</span> <span class="n">humidity</span> <span class="o">=</span> <span class="mi">42</span>
-<span class="k">WHERE</span> <span class="n">flight</span> <span class="o">=</span> <span class="s1">&#39;hab1&#39;</span> <span class="k">and</span> <span class="n">humidity</span> <span class="o">=</span> <span class="mi">41</span>
+<div class="highlight"><pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">readings</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">pressure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1021</span><span class="p">,</span><span class="w"> </span><span class="n">humidity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;hab1&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">humidity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">41</span><span class="w"></span>
 </pre></div>
 <p>Let's execute this statement and use pandas to show us the updated result:</p>
 
@@ -376,18 +376,6 @@
   </footer>
   
 
-  <script>
-    ((window.gitter = {}).chat = {}).options = {
-      room: 'sql_python_tutorial/Lobby'
-    };
-  </script>
-  <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
 </body>
 
 </html>

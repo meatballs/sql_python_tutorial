@@ -93,32 +93,32 @@
 <p>We want to hold readings of temperature and pressure taken during balloon flights.</p>
 <p>We'll use a table with eight columns for the flight name, a timestamp, measured values for temperature, pressure and humidity and some readings from an onboard accelerometer.</p>
 <p>Here's the sql to create that table:</p>
-<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
-    <span class="n">flight</span><span class="p">,</span>
-    <span class="n">ts</span><span class="p">,</span>
-    <span class="n">temp</span><span class="p">,</span>
-    <span class="n">pressure</span><span class="p">,</span>
-    <span class="n">humidity</span><span class="p">,</span>
-    <span class="n">accel_x</span><span class="p">,</span>
-    <span class="n">accel_y</span><span class="p">,</span>
-    <span class="n">accel_z</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">readings</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">flight</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ts</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">temp</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">pressure</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">humidity</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_x</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_y</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_z</span><span class="p">,</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
 </pre></div>
 <p><strong>NOTE:</strong> <em>It is a common convention that SQL keywords are capitalised but this isn't strictly necessary in order to be valid SQL. It's largely redundant today since most editors will apply syntax highlighting to SQL but, for this tutorial, the convention is useful as we'll see shortly.</em></p>
 <p>Although this SQL statement would work perfectly in SQLite, it is non-standard and wouldn't work in any other DBMS.</p>
 <p>In most DBMSs, we have to define the data type for each column. For the purposes of this tutorial, we'll write SQL that conforms to the standard and would work in any DBMS including SQLite.</p>
 <p>For a full description of exactly how SQLite differs, you can read the <a href="https://www.sqlite.org/datatype3.html">SQLite documentation</a>.</p>
 <p>Here's the standard form of the SQL to create our table with the data types included:</p>
-<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
-    <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
-    <span class="n">ts</span>        <span class="k">TIMESTAMP</span><span class="p">,</span>
-    <span class="n">temp</span>      <span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
-    <span class="n">pressure</span>  <span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
-    <span class="n">humidity</span>  <span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
-    <span class="n">accel_x</span>   <span class="nb">REAL</span><span class="p">,</span>
-    <span class="n">accel_y</span>   <span class="nb">REAL</span><span class="p">,</span>
-    <span class="n">accel_z</span>   <span class="nb">REAL</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">readings</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">flight</span><span class="w">    </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">ts</span><span class="w">        </span><span class="k">TIMESTAMP</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">temp</span><span class="w">      </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">pressure</span><span class="w">  </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">humidity</span><span class="w">  </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_x</span><span class="w">   </span><span class="nb">REAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_y</span><span class="w">   </span><span class="nb">REAL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_z</span><span class="w">   </span><span class="nb">REAL</span><span class="p">,</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
 </pre></div>
 <p>We defined the flight name as a variable length character string (VARCHAR) and we set a maximum length for those strings of 10 characters.</p>
 <p>Most DBMSs have a VARCHAR data type (although they may use a different name) and also a type for holding strings of fixed length.</p>
@@ -127,48 +127,48 @@
 <p>i.e. Temperature readings will have 3 digits in total with one of those to the right of the decimal point. Pressure and humidity readings will both be integers of 4 and 3 digits respectively.</p>
 <p>The accelerometer readings will be floating point numbers.</p>
 <p>By default, each column will allow null values but we can specify that nulls are not allowed and, optionally, whether a default value should be used instead:</p>
-<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
-    <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">ts</span>        <span class="k">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">temp</span>      <span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">pressure</span>  <span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">humidity</span>  <span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">accel_x</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">accel_y</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">accel_z</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">readings</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">flight</span><span class="w">    </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ts</span><span class="w">        </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">temp</span><span class="w">      </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">pressure</span><span class="w">  </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">humidity</span><span class="w">  </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_x</span><span class="w">   </span><span class="nb">REAL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_y</span><span class="w">   </span><span class="nb">REAL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_z</span><span class="w">   </span><span class="nb">REAL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
 </pre></div>
 <p>We can (and should) define a 'primary key' constraint for the table. This defines a field, or combination of fields, which must be unique for each record. The primary key can then be used by the DBMS to perform efficient indexed searches of the table contents.</p>
 <p>The constraint is given a name which, by convention, is often suffixed with _pk but can be anything you like:</p>
-<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
-    <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">ts</span>        <span class="k">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">temp</span>      <span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">pressure</span>  <span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">humidity</span>  <span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">accel_x</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">accel_y</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">accel_z</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">readings</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">flight</span><span class="w">    </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ts</span><span class="w">        </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">temp</span><span class="w">      </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">pressure</span><span class="w">  </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">humidity</span><span class="w">  </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_x</span><span class="w">   </span><span class="nb">REAL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_y</span><span class="w">   </span><span class="nb">REAL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_z</span><span class="w">   </span><span class="nb">REAL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
 
-    <span class="k">CONSTRAINT</span> <span class="n">readings_pk</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">flight</span><span class="p">,</span> <span class="n">ts</span><span class="p">),</span>
-<span class="p">)</span>
+<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">readings_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">flight</span><span class="p">,</span><span class="w"> </span><span class="n">ts</span><span class="p">),</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
 </pre></div>
 <p>We can also add constraints to each column so that the database will throw an error if any attempt is made to enter invalid values. These are know as CHECK constraints and again, each has a name - commonly the field to which the constraint applies followed by _ck:</p>
-<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">readings</span> <span class="p">(</span>
-    <span class="n">flight</span>    <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">ts</span>        <span class="k">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">temp</span>      <span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">pressure</span>  <span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">humidity</span>  <span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">accel_x</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">accel_y</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="n">accel_z</span>   <span class="nb">REAL</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">readings</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">flight</span><span class="w">    </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ts</span><span class="w">        </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">temp</span><span class="w">      </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">pressure</span><span class="w">  </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">humidity</span><span class="w">  </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_x</span><span class="w">   </span><span class="nb">REAL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_y</span><span class="w">   </span><span class="nb">REAL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">accel_z</span><span class="w">   </span><span class="nb">REAL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"></span>
 
-    <span class="k">CONSTRAINT</span> <span class="n">readings_pk</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">flight</span><span class="p">,</span> <span class="n">ts</span><span class="p">),</span>
-    <span class="k">CONSTRAINT</span> <span class="n">temp_ck</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">temp</span> <span class="k">BETWEEN</span> <span class="o">-</span><span class="mi">70</span> <span class="k">AND</span> <span class="mi">70</span><span class="p">),</span>
-    <span class="k">CONSTRAINT</span> <span class="n">pres_ck</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">pressure</span> <span class="k">BETWEEN</span> <span class="mi">0</span> <span class="k">AND</span> <span class="mi">2000</span><span class="p">),</span>
-    <span class="k">CONSTRAINT</span> <span class="n">hum_ck</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">humidity</span> <span class="k">BETWEEN</span> <span class="mi">0</span> <span class="k">AND</span> <span class="mi">100</span><span class="p">)</span>
-<span class="p">)</span>
+<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">readings_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">flight</span><span class="p">,</span><span class="w"> </span><span class="n">ts</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">temp_ck</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">temp</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="o">-</span><span class="mi">70</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">70</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">pres_ck</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">pressure</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">2000</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">hum_ck</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">humidity</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
 </pre></div>
 <p>In order to execute an SQL statement, we use the 'execute' method of our connection object and pass it our SQL statement as a string.</p>
 <p>Let's create a variable to hold our SQL statement and pass that variable to the execute method.</p>
@@ -261,18 +261,6 @@
   </footer>
   
 
-  <script>
-    ((window.gitter = {}).chat = {}).options = {
-      room: 'sql_python_tutorial/Lobby'
-    };
-  </script>
-  <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
 </body>
 
 </html>
