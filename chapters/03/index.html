@@ -61,50 +61,62 @@
     
 
     <div class="row">
-      <div class="col-sm-12">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+      <div class="col-sm-12"><div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Add-Some-Data">Add Some Data<a class="anchor-link" href="#Add-Some-Data">&#182;</a></h1><p>Now that we have a table, it's time to add some data into it.</p>
 <p>First, let's connect to our database:</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">sa</span>
 <span class="n">engine</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///flight.db&#39;</span><span class="p">)</span>
 <span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 </pre></div>
 
-    </div>
+     </div>
+</div>
 </div>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>To add data, we use an 'INSERT' statment.</p>
 <p>We specify the columns for which we have data and then the values for the record we want to create.</p>
 <p>In our case, we'll provide values for the flight name, timestamp and the teperature, pressure and humidity readings but we'll leave the accelerometer columns to have the default value of 0:</p>
-<div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">readings</span><span class="p">(</span><span class="n">flight</span><span class="p">,</span><span class="w"> </span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">pressure</span><span class="p">,</span><span class="w"> </span><span class="n">humidity</span><span class="p">)</span><span class="w"></span>
-<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2015-01-01 09:00:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1020</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">readings</span><span class="p">(</span><span class="n">flight</span><span class="p">,</span><span class="w"> </span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">pressure</span><span class="p">,</span><span class="w"> </span><span class="n">humidity</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2015-01-01 09:00:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1020</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">)</span>
 </pre></div>
 <p>Let's execute that statement:</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    INSERT INTO readings(flight, ts, temp, pressure, humidity)</span>
 <span class="s2">    VALUES (&#39;hab1&#39;, &#39;2015-01-01 09:00:00&#39;, 25.5, 1020, 40)</span>
@@ -112,50 +124,60 @@
 <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[8]:</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
-<div class="output_text output_subarea output_execute_result">
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
 <pre>&lt;sqlalchemy.engine.result.ResultProxy at 0x1124aa470&gt;</pre>
 </div>
 
 </div>
 
 </div>
+
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>A single INSERT statement can create multiple records:</p>
-<div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">readings</span><span class="p">(</span><span class="n">flight</span><span class="p">,</span><span class="w"> </span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">pressure</span><span class="p">,</span><span class="w"> </span><span class="n">humidity</span><span class="p">)</span><span class="w"></span>
-<span class="k">VALUES</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2015-01-01 09:01:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1019</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">),</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2015-01-01 09:02:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1019</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">readings</span><span class="p">(</span><span class="n">flight</span><span class="p">,</span><span class="w"> </span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">pressure</span><span class="p">,</span><span class="w"> </span><span class="n">humidity</span><span class="p">)</span>
+<span class="k">VALUES</span>
+<span class="w">  </span><span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2015-01-01 09:01:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1019</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="s1">&#39;hab1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2015-01-01 09:02:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1019</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">)</span>
 </pre></div>
 <p>Let's execute this statment too so that our table has three records in total:</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    INSERT INTO readings(flight, ts, temp, pressure, humidity)</span>
 <span class="s2">    VALUES</span>
@@ -165,34 +187,41 @@
 <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[9]:</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 
 
-<div class="output_text output_subarea output_execute_result">
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
 <pre>&lt;sqlalchemy.engine.result.ResultProxy at 0x1124b7048&gt;</pre>
 </div>
 
 </div>
 
 </div>
+
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>If you opted to <a href="http://owencampbell.me.uk/pages/howto#howto-local">run the code on your own computer</a> and also installed the graphical tool, you can now click the 'Browse Data' button to view the three records you just inserted.</p>
 <p>Our table has check constraints to validate the records we insert. What happens when we try to insert invalid records?</p>
 <p>Let's try to create a record with a negative pressure reading:</p>
@@ -200,11 +229,14 @@
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    INSERT INTO readings(flight, ts, temp, pressure, humidity)</span>
 <span class="s2">    VALUES (&#39;hab1&#39;, &#39;2015-01-01 09:03:00&#39;, 25.5, -1000, 40)</span>
@@ -213,41 +245,48 @@
     <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-    
 </pre></div>
 
-    </div>
+     </div>
 </div>
 </div>
+</div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>(sqlite3.IntegrityError) CHECK constraint failed: pres_ck [SQL: &#34;\n    INSERT INTO readings(flight, ts, temp, pressure, humidity)\n    VALUES (&#39;hab1&#39;, &#39;2015-01-01 09:03:00&#39;, 25.5, -1000, 40)\n&#34;] (Background on this error at: http://sqlalche.me/e/gkpj)
 </pre>
 </div>
 </div>
 
 </div>
+
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We see that SQLAlchemy raises an IntegrityError and the insert fails as expected.</p>
 
 </div>
 </div>
 </div>
- 
+</div>
+
 
 </div>
     </div>
